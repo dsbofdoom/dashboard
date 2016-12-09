@@ -1,0 +1,26 @@
+{
+  "name": "Dashboard",
+  "homepage": "https://github.com/dsbofdoom/dashboard",
+  "authors": [
+    "https://github.com/dsbofdoom/dashboard"
+  ],
+  "description": "A dashboard to view tuleap, mantis and other status",
+  "main": "",
+  "keywords": [
+    "dashboard",
+    "mantis",
+    "tuleap"
+  ],
+  "license": "GNU",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7"
+  }
+}
