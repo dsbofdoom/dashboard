@@ -1,5 +1,16 @@
 {
     "require": {
-        "silex/silex": "~2.0"
+        "silex/silex": "~2.0",
+        "fxp/composer-asset-plugin": "^1.2"
+    },
+    "extra": {
+        "asset-installer-paths": {
+            "npm-asset-library": "web/components"
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Dsbofdoom\\": "src/"
+        }
     }
 }
