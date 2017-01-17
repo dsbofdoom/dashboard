@@ -1,0 +1,46 @@
+@font-face {
+	font-family: 'Gotham';
+	src: url('./GothamBook.eot');
+	src: local('GothamBook'), url('./GothamBook.woff') format('woff'),
+		url('./GothamBook.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Gotham';
+	src: url('./gothambold1.eot');
+	src: local('gothambold1'), url('./gothambold1.woff') format('woff'),
+		url('./gothambold1.ttf') format('truetype');
+	font-weight: bold;
+	font-style: normal;
+}
+
+.body-gotham {
+	width: 100%;
+	margin: 0;
+	font-family: 'Gotham';
+	font-size: 1.2em !important;
+	background-color: rgba(245, 245, 245, 0) !important;
+	overflow-y: scroll;
+	webkit-text-stroke: 0.6px;
+	-webkit-text-stroke: 1px rgba(0, 0, 0, 0.1);
+}
+
+.html-fundo {
+	background: url("./../../image/login-bg.jpg") no-repeat center center
+		fixed;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+}
+
+input {
+	font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial,
+		sans-serif !important;
+}
+
+.form-control-feedback {
+	line-height: 30px !important;
+}

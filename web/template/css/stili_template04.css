@@ -1,0 +1,274 @@
+.body {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 8pt;
+	margin: 0px;
+	padding-top: 0px;
+	padding-right: 0px;
+	padding-bottom: 0px;
+	padding-left: 10px;
+	background-image: url(../images/fondo.gif);
+}
+body,td,th {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 8pt;
+}
+a {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	color: #FF6200;
+	text-decoration: none;
+}
+.tutto-table {
+	background-color: #808EA1;
+	padding-top: 0px;
+	padding-right: 3px;
+	padding-bottom: 0px;
+	padding-left: 3px;
+}
+.linea-v {
+	background-image: url(../images/lineaV.gif);
+	background-repeat: repeat-y;
+	background-position: right;
+	padding-right: 11px;
+}
+.menu-opz {
+	text-indent: 8px;
+	font-size: 8pt;
+	color: #FFFFFF;
+	text-decoration: none;
+	padding-top: 2px;
+	padding-right: 2px;
+	padding-bottom: 2px;
+	padding-left: 6px;
+	background-image: url(../images/menuSep01.gif);
+	background-repeat: repeat-x;
+}
+.menu-opz-over {
+	text-indent: 8px;
+	font-size: 8pt;
+	text-decoration: none;
+	background-color: #FF6200;
+	padding-top: 2px;
+	padding-right: 5px;
+	padding-bottom: 2px;
+	padding-left: 6px;
+	background-image: url(../images/menuOver.gif);
+	background-position: right center;
+	background-repeat: no-repeat;
+}
+.menu-link {
+	color: #FFFFFF;
+	text-decoration: none;
+}
+.menu-tit {
+	font-weight: bold;
+	color: #FFFFFF;
+	text-decoration: none;
+	padding: 2px;
+	background-image: url(../images/menuSep01.gif);
+	background-repeat: repeat-x;
+	font-size: 8pt;
+	background-color: #99A9BE;
+}
+.nl-celda {
+	padding: 5px;
+	background-color: #FFFFFF;
+	font-size: 7pt;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-top-style: none;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: none;
+	border-right-color: #808EA1;
+	border-bottom-color: #808EA1;
+}
+.nl-tit {
+	font-size: 8pt;
+	font-weight: bold;
+	color: #FF6200;
+}
+.nl-input {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 7pt;
+	color: #000000;
+	background-color: #C8CED7;
+	padding-right: 1px;
+	padding-left: 2px;
+	border-top-width: 1px;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+	border-top-style: solid;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-top-color: #64676C;
+	border-right-color: #C8CED7;
+	border-bottom-color: #C8CED7;
+	border-left-color: #64676C;
+	font-weight: bold;
+}
+.nl-bot {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 7pt;
+	color: #FFFFFF;
+	background-color: #FF6200;
+	border: none;
+}
+.cuerpo {
+	background-color: #EDEFF2;
+	padding: 8px;
+	background-image: url(../images/cuerpoEsqInf.gif);
+	background-repeat: no-repeat;
+	background-position: right bottom;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 8pt;
+}
+h2 {
+	font-size: 10pt;
+	font-weight: bold;
+	color: #FF6200;
+}
+.separador {
+	font-size: 8pt;
+	background-image: url(../images/separador.gif);
+	background-repeat: repeat-x;
+	margin-top: 2px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	margin-left: 2px;
+	padding: 0px;
+}
+.pie-link {
+	font-size: 7pt;
+	color: #FFFFFF;
+	text-decoration: none;
+}
+.pie-txt {
+	font-size: 7pt;
+	color: #D2D7DE;
+}
+.banner {
+	border-top-width: 1px;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+	border-top-style: solid;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-top-color: #FFFFFF;
+	border-right-color: #808EA1;
+	border-bottom-color: #808EA1;
+	border-left-color: #FFFFFF;
+}
+a:hover {
+	color: #FFFFFF;
+	background-color: #FF6200;
+}
+li {
+	list-style-image: url(../images/listaImg.gif);
+}
+h1 {
+	font-size: 8pt;
+	font-weight: bold;
+	color: #FFFFFF;
+	background-color: #FF6201;
+	padding-left: 5px;
+}
+.tit-01 {
+	font-size: 8pt;
+	font-weight: bold;
+	color: #FFFFFF;
+	background-color: #FF6201;
+	padding-left: 5px;
+	border-top-width: 1px;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+	border-top-style: solid;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-bottom-color: #BE4900;
+	border-top-color: #FFC5A0;
+	border-right-color: #BE4900;
+	border-left-color: #FFC5A0;
+}
+.box-01-txt {
+	padding: 5px;
+	background-color: #FFFFFF;
+	font-size: 8pt;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-top-style: solid;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-right-color: #808EA1;
+	border-bottom-color: #808EA1;
+	border-top-width: 1px;
+	border-left-width: 1px;
+	border-top-color: #FFFFFF;
+	border-left-color: #FFFFFF;
+}
+.news-body {
+	font-size: 8pt;
+	padding: 2px 2px 2px 5px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	margin: 0px;
+	scrollbar-face-color:#EDEFF2;
+	scrollbar-highlight-color:#C9CFD7;
+	scrollbar-3dlight-color:#FFFFFF;
+	scrollbar-darkshadow-color:#FFFFFF;
+	scrollbar-shadow-color:#99A9BE;
+	scrollbar-arrow-color:#FF6201;
+	scrollbar-track-color:#FFFFFF;
+	background-color: #FFFFFF;
+}
+.news-txt {
+	font-size: 8pt;
+	background-image: url(../images/listaImg.gif);
+	background-repeat: no-repeat;
+	background-position: left 5px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	padding-left: 7px;
+	margin-top: 2px;
+	margin-right: 0px;
+	margin-bottom: 5px;
+	margin-left: 0px;
+}
+.img-00 {
+	border-top-width: 1px;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+	border-top-style: solid;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-top-color: #808EA1;
+	border-right-color: #FFFFFF;
+	border-bottom-color: #FFFFFF;
+	border-left-color: #808EA1;
+}
+.box-02  {
+	padding: 5px;
+	background-color: #DCDFE5;
+	font-size: 8pt;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-top-style: solid;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-right-color: #808EA1;
+	border-bottom-color: #808EA1;
+	border-top-width: 1px;
+	border-left-width: 1px;
+	border-top-color: #FFFFFF;
+	border-left-color: #FFFFFF;
+	background-image: url(../images/contattiImg.gif);
+	background-repeat: no-repeat;
+	background-position: right bottom;
+}

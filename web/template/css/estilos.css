@@ -1,0 +1,119 @@
+.cabecalho {
+	color: #069;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-style: normal;
+	font-weight: 700;
+	text-decoration: none;
+}
+
+.subtitulo {
+	font-weight: bold;
+	font-size: 20px;
+	text-shadow: 3px 3px 5px rgba(255, 255, 255, 0.5), 3px 3px 5px
+		rgba(0, 0, 0, 0.5);
+}
+
+.center {
+	text-align: center;
+}
+
+input:hover, button:hover, textarea:hover, select:hover {
+	box-shadow: 0 0 5px #3c8dbc;
+}
+
+.main-footer2 {
+	-moz-transition: 0 .3s ease-in-out, margin .3s ease-in-out;
+	-o-transition: 0 .3s ease-in-out, margin .3s ease-in-out;
+	-webkit-transition: 0 .3s ease-in-out, margin .3s ease-in-out;
+	background: #fff;
+	border-top: 1px solid #d2d6de;
+	color: #444;
+	padding: 10px 15px;
+	transition: transform .3s ease-in-out, margin .3s ease-in-out;
+	z-index: 820;
+}
+
+.par_impar {
+	padding: 5px;
+}
+
+.par_impar:nth-child(even) {
+	background: #FFF;
+}
+
+.par_impar:nth-child(odd) {
+	background: #EBEBEB;
+}
+
+.spinLoading {
+	background: #3c8dbc;
+	border: 1px solid #666;
+	border-radius: 14px;
+	box-shadow: #000 2px 2px 40px;
+	display: none;
+	height: 120px;
+	left: calc(50% - 60px);
+	opacity: 0.75;
+	position: fixed;
+	top: calc(50% - 60px);
+	width: 120px;
+	z-index: 10000;
+}
+
+.nav-tabs>li>a {
+	border-style: solid !important;
+	border-width: 1px !important;
+	border-color: #ddd #ddd transparent;
+}
+
+.nav-tabs {
+	border-bottom: 1px solid #aaa !important;
+}
+
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus
+	{
+	border-top: 1px solid #aaa !important;
+	border-right: 1px solid #aaa !important;
+	border-bottom: 1px solid transparent !important;
+	border-left: 1px solid #aaa !important;
+}
+
+.nav-tabs>li>a:hover {
+	border-color: #eee #eee #aaa !important;
+}
+
+.bold {
+	font-weight: bold;
+}
+
+@media ( max-width : 767px) {
+	.visible-xs {
+		display: inline-block !important;
+	}
+}
+
+.verde {
+	background-color: rgba(115, 216, 114, 0.5);
+	padding: 0.5em;
+	border: 1px solid rgba(88, 195, 66, 0.5);
+}
+
+.amarelo {
+	background-color: rgba(243, 233, 116, 0.5);
+	padding: 0.5em;
+	border: 1px solid rgba(222, 212, 95, 0.5);
+}
+
+.vermelho {
+	background-color: rgba(245, 107, 107, 0.5);
+	padding: 0.5em;
+	border: 1px solid rgba(224, 86, 86, 0.5);
+}
+
+.SumoSelect {
+    padding-bottom: 12px;
+}
+
+li.opt.selected {
+    font-weight: bold !important;
+}
