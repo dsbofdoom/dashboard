@@ -26,7 +26,7 @@ class UtilDAO
 
             if ($parametros != null and count($parametros) > 0)
             {
-                                
+
                 if ($stm->paramCount() != count($parametros))
                 {
                     throw new Exception ("Query possui {$stm->paramCount()} e foram enviados " . count($parametros));
@@ -125,7 +125,8 @@ class UtilDAO
             }
         } catch (Exception $e)
         {
-            trataErro(SqlFormatter::format($qErro) . "<br>" . str_replace("\n", "<br>", $e));
+            error_log($qErro);
+            trataErro($qErro . "\n" . SqlFormatter::format($qErro) . "<br>" . str_replace("\n", "<br>", $e));
         }
 
         $con->close();
@@ -168,8 +169,7 @@ class UtilDAO
         $con->close();
     }
 
-    
-    
+
     /**
      * Trata os parametros e preenche uma query substituindo '?' pelo parametro corresponde já tratado.
      *
@@ -191,7 +191,8 @@ class UtilDAO
 
         if ($parametros != null and count($parametros) > 0)
         {
-            if (is_array($parametros[0])){
+            if (is_array($parametros[0]))
+            {
                 foreach ($parametros as $index => $parametro)
                 {
                     if ($stm->paramCount() != count($parametro))
@@ -210,10 +211,11 @@ class UtilDAO
 
                         $id++;
                     }
-                    
+
                     $stm->execute();
                 }
-            } else
+            }
+            else
             {
                 if ($stm->paramCount() != count($parametros))
                 {
@@ -243,7 +245,7 @@ class UtilDAO
 
         while ($row = $result->fetchArray(SQLITE3_ASSOC))
         {
-            $retorno [count($retorno)] = (object) $row;//self::charsetDefault($row);
+            $retorno [count($retorno)] = (object)$row;//self::charsetDefault($row);
         }
 
         return $retorno;
@@ -296,7 +298,7 @@ class UtilDAO
         }
 
         // Para String
-        return (string)"'" . $str [0] . "'";
+        return (string) "'" . $str [0] . "'";
     }
 
     private static function getArgType ($arg)

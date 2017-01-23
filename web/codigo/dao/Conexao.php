@@ -13,7 +13,7 @@ class Conexao extends SQLite3
         {
             parent::open(BANCO_URL);
 
-            if (DEBUG == 'true')
+            if (DEBUG)
             {
                 parent::exec(Querys::CREATE_TABLE);
             }

@@ -57,6 +57,42 @@ class Tuleap
         }
     }
 
+    private static function inserirValues ($artefato)
+    {
+        $querysThread = [];
+
+        foreach ($artefato as $key3 => $value3)
+        {
+            foreach ($value3->value as $key4 => $value4)
+            {
+                if (is_array($value4->field_value) || is_object($value4->field_value))
+                {
+                    continue;
+                }
+
+                $field_value = SQLite3::escapeString($value4->field_value);
+                $existe = UtilDAO::getResult(Querys::SELECT_FIELD_BY_ARTIF_ID_FIELD_NAME, $value3->artifact_id, $value4->field_name);
+                if (count($existe) == 0)
+                {
+                    $querysThread[] = UtilDAO::MontarQuery(Querys::INSERT_FIELD, $value3->artifact_id, $value4->field_name, $value4->field_label, $field_value);
+                }
+                elseif ($field_value != SQLite3::escapeString($existe[0]->field_value))
+                {
+                    $querysThread[] = UtilDAO::MontarQuery(Querys::UPDATE_FIELD, $field_value, $existe[0]->field_id);
+                }
+            }
+        }
+
+        if (count($querysThread) > 0)
+        {
+            error_log('Inserindo Value');
+
+            UtilDAO::executeArrayQuery($querysThread);
+
+            error_log('Inserindo Value finalizado');
+        }
+    }
+
     /**
      * @param $artifacts
      * @param $value2
@@ -72,8 +108,8 @@ class Tuleap
             {
                 $existe = $existe[0];
                 if ($existe->tracker_id != $value3->tracker_id
-                    || $existe->submitted_by != $value3->submitted_by
-                    || $existe->submitted_on != $value3->submitted_on
+                    || $existe->submitted_by != Util::trataData($value3->submitted_by)
+                    || $existe->submitted_on != Util::trataData($value3->submitted_on)
                     || $existe->last_update_date != $value3->last_update_date
                     || $existe->artifact_id != $value3->artifact_id
                     || $existe->group_id != $value2->group_id
@@ -82,8 +118,8 @@ class Tuleap
                     $querysThread[] = UtilDAO::MontarQuery(Querys::UPDATE_ARTIFACT,
                         $value3->tracker_id
                         , $value2->group_id
-                        , $value3->submitted_by
-                        , $value3->submitted_on
+                        , Util::trataData($value3->submitted_by)
+                        , Util::trataData($value3->submitted_on)
                         , $value3->last_update_date
                         , $value3->artifact_id
                     );
@@ -127,21 +163,6 @@ class Tuleap
             $this->dados[$key]->tracker = $this->client_tracker->getTrackerList($this->session_hash, $value->group_id);
         }
         error_log('Buscando Trackers finalizados');
-    }
-
-    public function buscaDadosArtifacts ()
-    {
-        $this->buscaDadosTracker();
-
-        error_log('Buscando Artifacts');
-        foreach ($this->dados as $key => $value)
-        {
-            foreach ($this->dados[$key]->tracker as $key2 => $value2)
-            {
-                $this->dados[$key]->tracker[$key2]->artifacts = $this->client_tracker->getArtifacts($this->session_hash, $value->group_id, $value2->tracker_id)->artifacts;
-            }
-        }
-        error_log('Buscando Trackers finalizado');
     }
 
     public function inserirDadosProjeto ()
@@ -215,7 +236,7 @@ class Tuleap
 
     public function inserirDadosArtifacts ()
     {
-        $this->trataTudo();
+        $this->buscaDadosArtifacts();
 
         error_log('Inserindo Artefatos');
 
@@ -228,6 +249,9 @@ class Tuleap
 
                 // CROSS REFERENCES
                 self::inserirCrossReferences($value2->artifacts);
+
+                // VALUES
+                self::inserirValues($value2->artifacts);
             }
         }
 
@@ -235,32 +259,39 @@ class Tuleap
         return Util::printInTree($this->dados);
     }
 
-    function trataTudo ()
+    public function buscaDadosArtifacts ()
     {
-        $this->buscaDadosArtifacts();
+        $this->buscaDadosTracker();
 
-        try
+        error_log('Buscando Artifacts');
+        foreach ($this->dados as $key => $value)
         {
-            foreach ($this->dados as $key => &$value)
+            foreach ($this->dados[$key]->tracker as $key2 => $value2)
             {
-                foreach ($value->tracker as $key2 => &$value2)
+                $this->dados[$key]->tracker[$key2]->artifacts = $this->client_tracker->getArtifacts($this->session_hash, $value->group_id, $value2->tracker_id)->artifacts;
+
+                foreach ($this->dados[$key]->tracker[$key2]->artifacts as $key3 => &$value3)
                 {
-                    foreach ($value2->artifacts as $key3 => &$value3)
+                    foreach ($value3->value as $key4 => &$value4)
                     {
-                        foreach ($value3->value as $key4 => &$value4)
+                        if (property_exists($value4->field_value, 'value'))
                         {
-                            if (property_exists($value4->field_value, 'value'))
+                            if (Util::endsWith($value4->field_name, 'date'))
                             {
-                                if (Util::endsWith($value4->field_name, 'date'))
-                                {
-                                    $value4->field_value = Util::trataData($value4->field_value->value);
-                                }
-                                else
-                                {
-                                    $value4->field_value = $value4->field_value->value;
-                                }
+                                $value4->field_value = Util::trataData($value4->field_value->value);
                             }
-                            elseif (property_exists($value4->field_value, 'bind_value'))
+                            else
+                            {
+                                $value4->field_value = $value4->field_value->value;
+                            }
+                        }
+                        elseif (property_exists($value4->field_value, 'bind_value'))
+                        {
+                            if (is_array($value4->field_value->bind_value) && count($value4->field_value->bind_value) == 1 && property_exists($value4->field_value->bind_value[0], 'bind_value_label'))
+                            {
+                                $value4->field_value = $value4->field_value->bind_value[0]->bind_value_label;
+                            }
+                            else
                             {
                                 $value4->field_value = $value4->field_value->bind_value;
                             }
@@ -268,16 +299,14 @@ class Tuleap
                     }
                 }
             }
-        } catch (Exception $e)
-        {
-
         }
+
+        error_log('Buscando Artifacts finalizado');
 
         return $this->dados;
     }
 
-    private
-    function init ()
+    private function init ()
     {
         if (isset($this->session_hash))
         {

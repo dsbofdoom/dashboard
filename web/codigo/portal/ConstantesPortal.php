@@ -1,16 +1,16 @@
 <?php
 
 // DEBUG
-const DEBUG = "true";
-if (DEBUG == "true")
+const DEBUG = true;
+if (DEBUG)
 {
     error_reporting(E_ALL);
     ini_set('display_errors', 1);
 }
 
 // Configuracoes do Portal
-const TITULO_PAGINA = "Gestão";
-const NOME_SISTEMA = "Gestão";
+const TITULO_PAGINA = "Dashboard";
+const NOME_SISTEMA = "Dashboard";
 const EMPRESA_SISTEMA = "Cast Group Inc.";
 const ANO_SISTEMA = "2017";
 const FAV_ICON = "http://servicos.dnit.gov.br/sigacont/img/favicon-2.png";
@@ -37,7 +37,7 @@ const PERFIL_2_CONSULTA = "2";
  */
 function trataErro ($msg, Exception $ex = null)
 {
-    if (DEBUG == "true")
+    if (DEBUG)
     {
         $msg = str_replace("\n", "<br>", $msg);
         //generateCallTrace();
@@ -63,7 +63,7 @@ function trataErro ($msg, Exception $ex = null)
 
 function generateCallTrace ($e)
 {
-    if (DEBUG != "true")
+    if (!DEBUG)
         return;
     
     $trace = explode("\n", $e->getTraceAsString());

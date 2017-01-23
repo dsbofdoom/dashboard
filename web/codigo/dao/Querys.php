@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS tb_usuario (
     tuleap_user,
     tuleap_pass
 );
-CREATE TABLE IF NOT EXISTS tb_grupo (
+CREATE TABLE IF NOT EXISTS tb_group (
     group_id INTEGER,
     group_name,
     unix_group_name,
@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS tb_tracker (
     description,
     item_name
 );
-CREATE TABLE IF NOT EXISTS tb_artefato (
+CREATE TABLE IF NOT EXISTS tb_artifact (
     artifact_id INTEGER,
     tracker_id  INTEGER,
     group_id    INTEGER,
@@ -62,11 +62,11 @@ CREATE TABLE IF NOT EXISTS tb_bind (
 CREATE INDEX IF NOT EXISTS idx_cross_id
     ON tb_cross_references (artifact_id);
 CREATE INDEX IF NOT EXISTS idx_artefato_id
-    ON tb_artefato (artifact_id);
+    ON tb_artifact (artifact_id);
 CREATE INDEX IF NOT EXISTS idx_tracker_id
     ON tb_tracker (tracker_id);
 CREATE INDEX IF NOT EXISTS idx_grupo_id
-    ON tb_grupo (group_id);
+    ON tb_group (group_id);
 SQL;
 
     // ############################################################
@@ -86,13 +86,13 @@ SQL;
     const UPDATE_USUARIO_RESET_SENHA = "UPDATE tb_usuario SET senha = ? WHERE id_usuario = ?";
 
     // ############################################################
-    // ##.........................GRUPO..........................##
+    // ##.........................GROUP..........................##
     // ############################################################
-    const SELECT_PROJETO_BY_ID = "SELECT * FROM tb_grupo WHERE group_id = ?";
+    const SELECT_PROJETO_BY_ID = "SELECT * FROM tb_group WHERE group_id = ?";
 
-    const INSERT_PROJETO = "INSERT INTO tb_grupo (group_id, group_name, unix_group_name, description) VALUES (?,?,?,?)";
+    const INSERT_PROJETO = "INSERT INTO tb_group (group_id, group_name, unix_group_name, description) VALUES (?,?,?,?)";
 
-    const UPDATE_PROJETO = "UPDATE tb_grupo SET group_name = ?, unix_group_name = ?, description = ? WHERE group_id = ?";
+    const UPDATE_PROJETO = "UPDATE tb_group SET group_name = ?, unix_group_name = ?, description = ? WHERE group_id = ?";
 
     // ############################################################
     // ##........................TRACKER.........................##
@@ -104,13 +104,13 @@ SQL;
     const UPDATE_TRACKER = "UPDATE tb_tracker SET group_id = ?, name = ?, description = ?, item_name = ? WHERE tracker_id = ?";
 
     // ############################################################
-    // ##.......................ARTEFATO.........................##
+    // ##.......................ARTIFACT.........................##
     // ############################################################
-    const SELECT_ARTIFACT_BY_ID = "SELECT * FROM tb_artefato WHERE artifact_id = ?";
+    const SELECT_ARTIFACT_BY_ID = "SELECT * FROM tb_artifact WHERE artifact_id = ?";
 
-    const INSERT_ARTIFACT = "INSERT INTO tb_artefato (artifact_id, tracker_id, group_id, submitted_by, submitted_on, last_update_date) VALUES (?,?,?,?,?,?)";
+    const INSERT_ARTIFACT = "INSERT INTO tb_artifact (artifact_id, tracker_id, group_id, submitted_by, submitted_on, last_update_date) VALUES (?,?,?,?,?,?)";
 
-    const UPDATE_ARTIFACT = "UPDATE tb_artefato SET tracker_id = ?, group_id = ?, submitted_by = ?, submitted_on = ?, last_update_date = ? WHERE artifact_id = ?";
+    const UPDATE_ARTIFACT = "UPDATE tb_artifact SET tracker_id = ?, group_id = ?, submitted_by = ?, submitted_on = ?, last_update_date = ? WHERE artifact_id = ?";
 
     // ############################################################
     // ##.....................CROSS_REFERENCE....................##
@@ -120,5 +120,34 @@ SQL;
     const DELETE_CROSS_REFERENCE = "DELETE FROM tb_cross_references WHERE artifact_id = ?";
 
     const INSERT_CROSS_REFERENCE = "INSERT INTO tb_cross_references (artifact_id, ref, url) VALUES (?,?,?)";
+
+    // ############################################################
+    // ##.........................FIELD..........................##
+    // ############################################################
+    const SELECT_FIELD_BY_ARTIF_ID_FIELD_NAME = "SELECT * FROM tb_field WHERE artifact_id = ? AND field_name = ?";
+
+    const DELETE_FIELD = "DELETE FROM tb_field WHERE artifact_id = ? AND field_name = ?";
+
+    const INSERT_FIELD = "INSERT INTO tb_field (artifact_id, field_name, field_label, field_value) VALUES (?,?,?,?)";
+
+    const UPDATE_FIELD = "UPDATE tb_field SET field_value = ? WHERE field_id = ?";
+
+    // ############################################################
+    // ##.......................DASHBOARD........................##
+    // ############################################################
+    const SELECT_DASHBOARD = <<<SQL
+SELECT
+    g.group_name
+    , g.group_id
+    , f.field_value
+    , COUNT(1) AS qtd
+FROM tb_group g
+    JOIN tb_tracker t USING (group_id)
+    JOIN tb_artifact a USING (tracker_id, group_id)
+    JOIN tb_field f USING (artifact_id)
+WHERE field_name LIKE 'status_id'
+GROUP BY g.group_name
+    , f.field_value
+SQL;
 
 }

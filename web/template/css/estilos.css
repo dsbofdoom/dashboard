@@ -2,10 +2,12 @@
     color: #069;
     font-family: Verdana, Arial, Helvetica, sans-serif;
     font-style: normal;
-    font-weight: 700;
+    /*font-weight: 700;*/
     text-decoration: none;
 }
-
+h3.cabecalho {
+    font-weight: 700;
+}
 .subtitulo {
     font-weight: bold;
     font-size: 20px;
@@ -114,4 +116,8 @@ input:hover, button:hover, textarea:hover, select:hover {
 
 li.opt.selected {
     font-weight: bold !important;
+}
+
+.fa.pull-right {
+    margin-right: 1em !important;
 }

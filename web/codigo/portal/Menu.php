@@ -3,26 +3,12 @@
 class Menu
 {
     const MENU = array(
-//        array(
-//            "fa"       => "fa-link",
-//            "text"     => "Contratos",
-//            "url"      => "#",
-//            "children" => array(
-//                array(
-//                    "fa"         => "fa-plus",
-//                    "text"       => "Cadastrar",
-//                    "permission" => PERFIL_1_ESCRITA,
-//                    "url"        => DIRETORIO_CONTEUDO . "/addContrato.php",
-//                    "children"   => null
-//                ),
-//                array(
-//                    "fa"       => "fa-search",
-//                    "text"     => "Pesquisar",
-//                    "url"      => DIRETORIO_CONTEUDO . "/viewContrato.php",
-//                    "children" => null
-//                )
-//            )
-//        ),
+        array(
+            "fa"         => "fa-link",
+            "text"       => "Carga",
+            "permission" => PERFIL_1_ESCRITA,
+            "url"        => DIRETORIO_CONTEUDO . "/carga.php",
+        ),
         array(
             "fa"         => "fa-cogs",
             "text"       => "Configurações",

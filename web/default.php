@@ -7,52 +7,28 @@ $tpl->NOME_PAGINA = "";
 
 $tpl->addFile("DESCRICAO_PAGINA", "default.html");
 
-$cargas = [
-    [
-        'TIPO' => 'projeto',
-        'NOME' => 'Projeto',
-        'FUNC' => 'inserirDadosProjeto'
-    ],
-    [
-        'TIPO' => 'tracker',
-        'NOME' => 'Tracker',
-        'FUNC' => 'inserirDadosTracker'
-    ],
-    [
-        'TIPO' => 'artifacts',
-        'NOME' => 'Artefato',
-        'FUNC' => 'inserirDadosArtifacts'
-    ],
-    [
-        'TIPO' => 'cross_references',
-        'NOME' => 'Cross References',
-        'FUNC' => 'inserirDadosCrossReferences'
-    ],
-    [
-        'TIPO' => 'values',
-        'NOME' => 'Valores',
-        'FUNC' => 'inserirDadosValues'
-    ],
-];
+$result = UtilDAO::getResult(Querys::SELECT_DASHBOARD);
+$ultimo = $result[0]->group_name;
 
-$saida = '';
-$time_start = microtime(true);
+$tpl->GROUP_NAME = $result[0]->group_name;
 
-$tuleap = new Tuleap('saulocorreia', 'Carol010');
-foreach ($cargas as $index => $item)
+foreach ($result as $row)
 {
-    if (isset($_POST[$item['TIPO']]))
+    if ($ultimo != $row->group_name)
     {
-        $saida = $tuleap->{$item['FUNC']}();
+        $tpl->block('BLOCK_GROUP');
+
+        $tpl->GROUP_NAME = $row->group_name;
+
+        $ultimo = $row->group_name;
+
     }
 
-    $tpl->TIPO = $item['TIPO'];
-    $tpl->NOME = $item['NOME'];
-    $tpl->block("BLOCK_CARGA");
+    $tpl->FIELD_VALUE = $row->field_value;
+    $tpl->QTD = $row->qtd;
+    $tpl->block('BLOCK_STATUS');
 }
 
-$time = microtime(true) - $time_start;
-
-$tpl->SAIDA_WS = "Process Time: {$time}<pre>{$saida}</pre>";
+$tpl->block('BLOCK_GROUP');
 
 $tpl->show();

@@ -10,7 +10,7 @@ require_once($_SERVER ['DOCUMENT_ROOT'] . "/codigo/util/Util.php");
 $tpl = new Template ($_SERVER ['DOCUMENT_ROOT'] . "/template/pagina.html", true);
 
 // DEBUG
-$tpl->DEBUG = Util::SendScript("var debug = " . DEBUG . ";");
+$tpl->DEBUG = Util::SendScript("var debug = " . (DEBUG ? 'true' : 'false') . ";");
 
 // CABECALHO
 $tpl->TITULO_PAGINA = TITULO_PAGINA;
@@ -45,9 +45,10 @@ foreach ($menu as $m)
     $tpl->MENU_TEXT = $m ["text"];
 
     // verifica se possui menu filho
-    if (isset ($m ["children"]))
+    if (isset ($m ["children"]) && $m ["children"] != null)
     {
         $tpl->MENU_CHILDREN_1 = "<i class='fa fa-angle-left pull-right'></i>";
+        $tpl->block('BLOCK_PRE_PRE_CHILDREN_1');
         foreach ($m ["children"] as $c1)
         {
             // Se o usuario nao tiver permissao pular este menu

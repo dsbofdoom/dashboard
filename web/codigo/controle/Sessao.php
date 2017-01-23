@@ -8,7 +8,7 @@ if (!isset ($_SESSION ['ID_USUARIO']))
 }
 else
 {
-    if (DEBUG == "true")
+    if (DEBUG)
     {
         $retorno = UtilDAO::getResult(Querys::SELECT_USUARIO_BY_ID, $_SESSION ['ID_USUARIO']);
 

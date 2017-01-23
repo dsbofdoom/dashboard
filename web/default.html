@@ -1,16 +1,25 @@
 <div class="box-header with-border">
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 form-group">
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 form-group bold text-primary subtitulo">Carga do Tuleap</div>
-        <!-- BEGIN BLOCK_CARGA -->
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 form-group">
-            <form id="formulario" method="post">
-                <input id="{TIPO}" name="{TIPO}" type="hidden">
-                <input type="submit" value="Carga {NOME}">
-            </form>
+    <!-- BEGIN BLOCK_GROUP -->
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 box box-info box-header form-group" style="width: calc(50% - 10px);margin: 5px;">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            {GROUP_NAME}
         </div>
-        <!-- END BLOCK_CARGA -->
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 form-group">
-            {SAIDA_WS}
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="line-height: 1.5em;">
+            <table class="table text-center">
+                <thead>
+                <tr>
+                    <th>Status</th>
+                    <th>Quantidade</th>
+                </tr>
+                </thead>
+                <!-- BEGIN BLOCK_STATUS -->
+                <tr class="par_impar">
+                    <td>{FIELD_VALUE}</td>
+                    <td>{QTD}</td>
+                </tr>
+                <!-- END BLOCK_STATUS -->
+            </table>
         </div>
     </div>
+    <!-- END BLOCK_GROUP -->
 </div>
