@@ -26,6 +26,7 @@ class UtilDAO
 
             if ($parametros != null and count($parametros) > 0)
             {
+                                
                 if ($stm->paramCount() != count($parametros))
                 {
                     throw new Exception ("Query possui {$stm->paramCount()} e foram enviados " . count($parametros));
@@ -240,9 +241,9 @@ class UtilDAO
     {
         $retorno = array();
 
-        while ($row = $result->fetchArray())
+        while ($row = $result->fetchArray(SQLITE3_ASSOC))
         {
-            $retorno [count($retorno)] = $row;//self::charsetDefault($row);
+            $retorno [count($retorno)] = (object) $row;//self::charsetDefault($row);
         }
 
         return $retorno;
