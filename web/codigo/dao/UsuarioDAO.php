@@ -52,27 +52,20 @@ class UsuarioDAO
     {
         try
         {
-            $retorno = UtilDAO::getResult(Querys::SELECT_USUARIO_BY_USUARIO_ATIVO, $_POST ["login"]);
-            if (count($retorno) == 1 && empty($retorno[0]->senha))
-            {
-                $_POST ["id_usuario"] = $retorno[0]->id_usuario;
-                self::ResetSenha();
-            }
-
             $retorno = UtilDAO::getResult(Querys::SELECT_LOGIN, $_POST ["login"], md5($_POST ["senha"]));
             if (count($retorno) == 0)
             {
                 Ajax::RespostaErro("Usuário e/ou Senha incorretos.");
             }
+            else
+            {
+                $_SESSION ['NOME_USUARIO'] = $retorno [0] ['nome'];
+                $_SESSION ['ID_USUARIO'] = $retorno [0] ['id_usuario'];
+                $_SESSION ['USUARIO'] = $retorno [0] ['usuario'];
+                $_SESSION ['PERFIL'] = $retorno [0] ['perfil'];
 
-            $_SESSION ['NOME_USUARIO'] = $retorno [0]->nome;
-            $_SESSION ['ID_USUARIO'] = $retorno [0]->id_usuario;
-            $_SESSION ['USUARIO'] = $retorno [0]->usuario;
-            $_SESSION ['PERFIL'] = $retorno [0]->perfil;
-            $_SESSION ['TULEAP_USER'] = $retorno [0]->tuleap_user;
-            $_SESSION ['TULEAP_PASS'] = $retorno [0]->tuleap_pass;
-
-            Ajax::RespostaSucesso("", true, Ajax::TIPO_SUCCESS);
+                Ajax::RespostaSucesso("", true, Ajax::TIPO_SUCCESS);
+            }
         } catch (Exception $e)
         {
             Ajax::RespostaErro("Falha ao logar.", $e);
@@ -105,10 +98,7 @@ class UsuarioDAO
                     Ajax::RespostaErro("Senha incorreta.");
                 }
 
-                UtilDAO::executeQueryParam(Querys::UPDATE_USUARIO_SENHA, $_POST ["nome"], $_POST ["email"], md5($_POST ["nova_senha"]), $_POST ["tuleap_user"], $_POST ["tuleap_senha"], $_POST ["id_usuario"]);
-                $_POST ["login"] = $_POST ["email"];
-                $_POST ["senha"] = $_POST ["nova_senha"];
-                self::login();
+                UtilDAO::executeQueryParam(Querys::UPDATE_USUARIO_SENHA, $_POST ["nome"], $_POST ["email"], md5($_POST ["nova_senha"]), $_POST ["id_usuario"]);
             }
             else
             {
