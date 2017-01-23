@@ -3,29 +3,55 @@ require_once($_SERVER ['DOCUMENT_ROOT'] . "/template/pagina.php");
 require_once($_SERVER ['DOCUMENT_ROOT'] . "/codigo/soap/Tuleap.php");
 
 $tpl->CAMINHO_PAGINA = "";
-
 $tpl->NOME_PAGINA = "";
-
-$tuleap = new Tuleap('saulocorreia', 'Carol010');
 
 $tpl->addFile("DESCRICAO_PAGINA", "default.html");
 
+$cargas = [
+    [
+        'TIPO' => 'projeto',
+        'NOME' => 'Projeto',
+        'FUNC' => 'inserirDadosProjeto'
+    ],
+    [
+        'TIPO' => 'tracker',
+        'NOME' => 'Tracker',
+        'FUNC' => 'inserirDadosTracker'
+    ],
+    [
+        'TIPO' => 'artifacts',
+        'NOME' => 'Artefato',
+        'FUNC' => 'inserirDadosArtifacts'
+    ],
+    [
+        'TIPO' => 'cross_references',
+        'NOME' => 'Cross References',
+        'FUNC' => 'inserirDadosCrossReferences'
+    ],
+    [
+        'TIPO' => 'values',
+        'NOME' => 'Valores',
+        'FUNC' => 'inserirDadosValues'
+    ],
+];
+
 $saida = '';
 $time_start = microtime(true);
-if (isset($_POST['projeto']))
+
+$tuleap = new Tuleap('saulocorreia', 'Carol010');
+foreach ($cargas as $index => $item)
 {
-    $saida = $tuleap->inserirDadosProjeto();
+    if (isset($_POST[$item['TIPO']]))
+    {
+        $saida = $tuleap->{$item['FUNC']}();
+    }
+
+    $tpl->TIPO = $item['TIPO'];
+    $tpl->NOME = $item['NOME'];
+    $tpl->block("BLOCK_CARGA");
 }
-if (isset($_POST['tracker']))
-{
-    $saida = $tuleap->inserirDadosTracker();
-}
-if (isset($_POST['artifacts']))
-{
-    $saida = $tuleap->inserirDadosArtifacts();
-}
-$time_end = microtime(true);
-$time = $time_end - $time_start;
+
+$time = microtime(true) - $time_start;
 
 $tpl->SAIDA_WS = "Process Time: {$time}<pre>{$saida}</pre>";
 

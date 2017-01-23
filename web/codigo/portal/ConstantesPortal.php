@@ -61,8 +61,11 @@ function trataErro ($msg, Exception $ex = null)
     throw new Exception ($msg, -1, $ex);
 }
 
-function generateCallTrace($e)
+function generateCallTrace ($e)
 {
+    if (DEBUG != "true")
+        return;
+    
     $trace = explode("\n", $e->getTraceAsString());
 
     echo implode("<br>", $trace);
