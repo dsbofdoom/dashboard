@@ -10,6 +10,11 @@ class Menu
             "url"        => DIRETORIO_CONTEUDO . "/carga.php",
         ),
         array(
+            "fa"         => "fa-file-text-o",
+            "text"       => "Documentação",
+            "url"        => DIRETORIO_CONTEUDO . "/documentacao.php",
+        ),
+        array(
             "fa"         => "fa-cogs",
             "text"       => "Configurações",
             "url"        => "#",

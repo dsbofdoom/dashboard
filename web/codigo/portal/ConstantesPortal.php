@@ -28,6 +28,12 @@ const PERFIL_0_ADMIN = "0";
 const PERFIL_1_ESCRITA = "1";
 const PERFIL_2_CONSULTA = "2";
 
+// Constantes dos arquivos de template 
+define ('TEMPLATE_ROTEIRO', "{$_SERVER ['DOCUMENT_ROOT']}/arquivos/roteiro");
+define ('TEMPLATE_TERMO_ENTREGA', "{$_SERVER ['DOCUMENT_ROOT']}/arquivos/termo");
+define ('TEMPLATE_HISTORIA', "{$_SERVER ['DOCUMENT_ROOT']}/arquivos/AnaliseFuncionalidades");
+
+
 /**
  * Tratamento de erro padrão do portal
  *

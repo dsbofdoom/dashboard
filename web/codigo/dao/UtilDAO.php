@@ -245,7 +245,14 @@ class UtilDAO
 
         while ($row = $result->fetchArray(SQLITE3_ASSOC))
         {
-            $retorno [count($retorno)] = (object)$row;//self::charsetDefault($row);
+            $linha = [];
+
+            foreach ($row as $index => $item)
+            {
+                $linha[$index] = self::charsetDefault($item);
+            }
+            
+            $retorno [] = (object) $linha;
         }
 
         return $retorno;
@@ -298,7 +305,7 @@ class UtilDAO
         }
 
         // Para String
-        return (string) "'" . $str [0] . "'";
+        return (string)"'" . $str [0] . "'";
     }
 
     private static function getArgType ($arg)

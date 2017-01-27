@@ -11,6 +11,7 @@ $result = UtilDAO::getResult(Querys::SELECT_DASHBOARD);
 $ultimo = $result[0]->group_name;
 
 $tpl->GROUP_NAME = $result[0]->group_name;
+$tpl->GROUP_ID = $result[0]->group_id;
 
 foreach ($result as $row)
 {
@@ -19,7 +20,8 @@ foreach ($result as $row)
         $tpl->block('BLOCK_GROUP');
 
         $tpl->GROUP_NAME = $row->group_name;
-
+        $tpl->GROUP_ID = $row->group_id;
+            
         $ultimo = $row->group_name;
 
     }

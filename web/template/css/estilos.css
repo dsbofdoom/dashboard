@@ -5,9 +5,11 @@
     /*font-weight: 700;*/
     text-decoration: none;
 }
+
 h3.cabecalho {
     font-weight: 700;
 }
+
 .subtitulo {
     font-weight: bold;
     font-size: 20px;
@@ -120,4 +122,8 @@ li.opt.selected {
 
 .fa.pull-right {
     margin-right: 1em !important;
+}
+
+.table > thead {
+    background-color: rgba(60, 141, 188, 0.4);
 }

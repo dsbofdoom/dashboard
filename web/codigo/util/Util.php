@@ -193,9 +193,101 @@ class Util
         {
             return '';
         }
-        
-        date_default_timezone_set('America/Sao_Paulo');
 
-        return date("y-m-d H:i:s", $time);
+        date_default_timezone_set('UTC');//America/Sao_Paulo');
+
+        return date("Y-m-d H:i:s", $time);
+    }
+
+    public static function criaPasta ($pasta)
+    {
+        if (!is_dir($pasta))
+        {
+            return mkdir($pasta, null, true);
+        }
+    }
+
+    public static function zipFile ($source, $destination, $remove = '')
+    {
+        if (!extension_loaded('zip') || !file_exists($source))
+        {
+            return false;
+        }
+
+        $zip = new ZipArchive();
+        if (!$zip->open($destination, ZIPARCHIVE::CREATE))
+        {
+            return false;
+        }
+
+        $source = str_replace('\\', '/', realpath($source));
+
+        if (is_dir($source) === true)
+        {
+            $files = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($source), RecursiveIteratorIterator::SELF_FIRST);
+
+            foreach ($files as $file)
+            {
+                $file = str_replace('\\', '/', $file);
+
+                // Ignore "." and ".." folders
+                if (in_array(substr($file, strrpos($file, '/') + 1), array('.', '..')))
+                {
+                    continue;
+                }
+
+
+                if (is_dir($file) === true)
+                {
+                    $zip->addEmptyDir(str_replace($source . '/', '', $file . '/'));
+                }
+                else
+                {
+                    if (is_file($file) === true)
+                    {
+                        $zip->addFromString(str_replace($source . '/', '', $file), file_get_contents(realpath($file)));
+                    }
+                }
+            }
+        }
+        else
+        {
+            if (is_file($source) === true)
+            {
+                $zip->addFromString(basename($source), file_get_contents(realpath($source)));
+            }
+        }
+
+        return $zip->close();
+    }
+
+    public static function converterTemplate ($template, $search, $replace, $saida)
+    {
+        //open file and get data
+        $data = file_get_contents($template . "/word/document2.xml");
+
+        // do tag replacements or whatever you want
+        $data = str_replace($search, $replace, $data);
+
+        //save it back
+        file_put_contents($template . "/word/document.xml", $data);
+
+        return (bool)Util::zipFile($template, $saida);
+    }
+
+    public static function removeDir ($dir)
+    {
+        foreach (glob($dir . '/*') as $file)
+        {
+            if (is_dir($file))
+            {
+                self::removeDir($file);
+            }
+            else
+            {
+                unlink($file);
+            }
+        }
+        rmdir($dir);
     }
 }

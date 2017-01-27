@@ -14,33 +14,38 @@ CREATE TABLE IF NOT EXISTS tb_usuario (
     perfil,
     ativo,
     tuleap_user,
-    tuleap_pass
+    tuleap_pass,
+    data_insercao DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 CREATE TABLE IF NOT EXISTS tb_group (
     group_id INTEGER,
     group_name,
     unix_group_name,
-    description
+    description,
+    data_insercao DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 CREATE TABLE IF NOT EXISTS tb_tracker (
     tracker_id INTEGER,
     group_id   INTEGER,
     name,
     description,
-    item_name
+    item_name,
+    data_insercao DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 CREATE TABLE IF NOT EXISTS tb_artifact (
     artifact_id INTEGER,
     tracker_id  INTEGER,
     group_id    INTEGER,
-    submitted_by,
-    submitted_on,
-    last_update_date
+    submitted_by DATETIME,
+    submitted_on DATETIME,
+    last_update_date DATETIME,
+    data_insercao DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 CREATE TABLE IF NOT EXISTS tb_cross_references (
     artifact_id,
     ref,
-    url
+    url,
+    data_insercao DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE IF NOT EXISTS tb_field (
@@ -48,7 +53,8 @@ CREATE TABLE IF NOT EXISTS tb_field (
     artifact_id,
     field_name,
     field_label,
-    field_value
+    field_value,
+    data_insercao DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE IF NOT EXISTS tb_bind (
@@ -56,7 +62,8 @@ CREATE TABLE IF NOT EXISTS tb_bind (
     field_id,
     bind_value_id,
     bind_value_label,
-    bind_value
+    bind_value,
+    data_insercao DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE INDEX IF NOT EXISTS idx_cross_id
@@ -88,7 +95,9 @@ SQL;
     // ############################################################
     // ##.........................GROUP..........................##
     // ############################################################
+    const SELECT_PROJETO = "SELECT group_id, unix_group_name, group_name FROM tb_group";
     const SELECT_PROJETO_BY_ID = "SELECT * FROM tb_group WHERE group_id = ?";
+    const SELECT_PROJETO_BY_ARTIFACT_ID = "SELECT g.* FROM tb_group g JOIN tb_artifact a USING (group_id) WHERE a.artifact_id = ?";
 
     const INSERT_PROJETO = "INSERT INTO tb_group (group_id, group_name, unix_group_name, description) VALUES (?,?,?,?)";
 
@@ -107,6 +116,7 @@ SQL;
     // ##.......................ARTIFACT.........................##
     // ############################################################
     const SELECT_ARTIFACT_BY_ID = "SELECT * FROM tb_artifact WHERE artifact_id = ?";
+    const SELECT_RELEASE_BY_ARTIFACT_ID = "SELECT CAST(substr(ref, 6) AS DECIMAL) AS rel FROM tb_artifact a JOIN tb_cross_references c USING (artifact_id) WHERE c.artifact_id = ? AND c.ref LIKE 'rel%'";
 
     const INSERT_ARTIFACT = "INSERT INTO tb_artifact (artifact_id, tracker_id, group_id, submitted_by, submitted_on, last_update_date) VALUES (?,?,?,?,?,?)";
 
@@ -149,5 +159,41 @@ WHERE field_name LIKE 'status_id'
 GROUP BY g.group_name
     , f.field_value
 SQL;
+
+    const SELECT_SPRINT_RELEASE_BY_GROUP_ID = <<<SQL
+SELECT
+      a.artifact_id  AS sprint
+    , substr(ref, 6) AS rel
+FROM tb_group g
+    JOIN tb_tracker t USING (group_id)
+    JOIN tb_artifact a USING (tracker_id, group_id)
+    JOIN tb_cross_references c USING (artifact_id)
+WHERE t.item_name = 'sprint'
+      AND g.group_id = ?
+      AND c.ref LIKE 'rel%'
+ORDER BY 2, 1
+SQL;
+
+    const SELECT_VALUES_BY_SPRINT = <<<SQL
+SELECT
+    f.artifact_id
+    , f.field_name
+    , f.field_value
+FROM tb_field f
+WHERE f.artifact_id IN (
+    SELECT CAST(substr(ref, 8) AS DECIMAL) AS historia
+    FROM tb_artifact a
+        JOIN tb_cross_references c USING (artifact_id)
+    WHERE c.artifact_id = ? AND c.ref LIKE 'story%') AND
+      f.field_name IN ('como_demonstrar', 'observao', 'in_order_to_1', 'acceptance_criteria_1')
+SQL;
+    const SELECT_STORY_BY_SPRINT = <<<SQL
+SELECT CAST(substr(ref, 8) AS DECIMAL) AS historia
+FROM tb_artifact a
+    JOIN tb_cross_references c USING (artifact_id)
+WHERE c.artifact_id = ?
+      AND c.ref LIKE 'story%'
+SQL;
+
 
 }
