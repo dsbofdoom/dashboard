@@ -1,1 +1,1 @@
-"C:\Program Files\php\php.exe" -S localhost:8000 -t "C:\Users\saulocorreia\Desktop\web"
+"php\php.exe" -S localhost:8000 -t "."

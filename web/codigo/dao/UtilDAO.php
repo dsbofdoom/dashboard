@@ -3,7 +3,7 @@ require_once($_SERVER ['DOCUMENT_ROOT'] . "/codigo/dao/Conexao.php");
 
 class UtilDAO
 {
-    const REGEX_GREP_NUMERICO = "/^(\d)+(([,]|[\.])*(\d)*)*(?!.*[#$%^&*()+=\-\[\]\';,.\/{}|\":<>?~\\\\a-z])+/ADi";
+    const REGEX_GREP_NUMERICO = "/^(\d)+(([,]|[\.])*(\d)*)*(?!.*[#$%^&*()+=\-\[\]\';,.\/{}|\":<>?~\\\\a-z\s])+/ADi";
     const REGEX_GREP_DATETIME = "/((\d{2})[\/])((\d{2})[\/])(\d{4})([ ]\d{2}[:]\d{2}[:]\d{2})?/AD";
     const REGEXP_REPLACE_DATETIME = "/((\d{2})[\/])((\d{2})[\/])(\d{4})([ ]\d{2}[:]\d{2}[:]\d{2})?/";
     const REGEX_GREP_DATE = "/((\d{2})[\/])((\d{2})[\/])(\d{4})/AD";
@@ -16,7 +16,7 @@ class UtilDAO
      * @param unknown ...$parametros
      * @return array
      */
-    public static function getResult ($query, ...$parametros)
+    public static function getResult (string $query, ...$parametros)
     {
         try
         {
@@ -62,7 +62,7 @@ class UtilDAO
         return ( array )$retorno;
     }
 
-    public static function getResultArrayParam ($query, array $parametros)
+    public static function getResultArrayParam (string $query, array $parametros)
     {
         if ($parametros != null and count($parametros) > 0)
         {
@@ -87,7 +87,7 @@ class UtilDAO
      *
      * @param string $query
      */
-    public static function executeQuery ($query)
+    public static function executeQuery (string $query)
     {
         $con = new Conexao ();
 
@@ -132,7 +132,7 @@ class UtilDAO
         $con->close();
     }
 
-    public static function executeQueryParamArray ($query, array $parametros)
+    public static function executeQueryParamArray (string $query, array $parametros)
     {
         return forward_static_call_array(array(
             'self',
@@ -149,7 +149,7 @@ class UtilDAO
      * @param string  $query
      * @param unknown ...$parametros
      */
-    public static function executeQueryParam ($query, ...$parametros)
+    public static function executeQueryParam (string $query, ...$parametros)
     {
         $con = new Conexao ();
 
@@ -177,10 +177,12 @@ class UtilDAO
      * @param mixed  ...$parametro
      * @return string com a query preenchida
      */
-    public static function MontarQuery ($query, ...$parametro)
+    public static function MontarQuery (string $query, ...$parametro)
     {
         foreach ($parametro as $value)
+        {
             $query = preg_replace('/[?]/', self::ConverteParaSQL($value), $query, 1);
+        }
 
         return ( string )$query . ';';
     }
@@ -251,8 +253,8 @@ class UtilDAO
             {
                 $linha[$index] = self::charsetDefault($item);
             }
-            
-            $retorno [] = (object) $linha;
+
+            $retorno [] = (object)$linha;
         }
 
         return $retorno;

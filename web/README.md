@@ -3,14 +3,7 @@ A dashboard to view tuleap, mantis and other status
 
 # Instalação
 
-Necessario colocar os DLLs de Driver MSSQL na pasta EXT do PHP
-
-Acrescentar no php.ini
-
-    extension=php_pdo_sqlsrv_7_ts_x86.dll
-    extension=php_sqlsrv_7_ts_x86.dll 
-
-Modificar também o  auto_start da session
+Modificar o auto_start da session
 
 	; Initialize session on request startup
 	; http://php.net/session.auto-start

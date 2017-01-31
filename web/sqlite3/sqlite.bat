@@ -1,0 +1,1 @@
+"C:\Cast\sqlite3\sqlite3.exe" "C:\Users\saulocorreia\Desktop\web\db\banco.db"

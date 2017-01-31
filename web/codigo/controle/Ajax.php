@@ -32,7 +32,7 @@ class Ajax
      * @param bool   $retorno
      *            deverá chamar função?
      */
-    public static function RespostaSucesso ($msg, $retorno, $tipo = Ajax::TIPO_SUCCESS)
+    public static function RespostaSucesso (string $msg, bool $retorno, string $tipo = Ajax::TIPO_SUCCESS)
     {
         die (json_encode(Ajax::montaResposta($msg, $tipo, $retorno), JSON_PRETTY_PRINT));
     }
@@ -51,7 +51,7 @@ class Ajax
      * @param string $msg
      *            mensagem a ser mostrada
      */
-    public static function RespostaErro ($msg, Exception $trace = null)
+    public static function RespostaErro (string $msg, Exception $trace = null)
     {
         $retorno = Ajax::montaMsg($msg, Ajax::TIPO_ERROR);
         if ($trace != null)
@@ -97,7 +97,7 @@ class Ajax
      * @param array  $dados
      *            array com os dados
      */
-    public static function RespostaGenerica ($msg, $tipo, $retorno, array $dados)
+    public static function RespostaGenerica (string $msg, string $tipo, bool $retorno, array $dados)
     {
         $resposta = Ajax::montaResposta($msg, $tipo, $retorno);
         $resposta ["valores"] = $dados;
@@ -128,7 +128,7 @@ class Ajax
      * @param string $tipo
      * @return string[][]
      */
-    private static function montaMsg ($msg, $tipo)
+    private static function montaMsg (string $msg, string $tipo)
     {
         return array(
             "msg" => array(

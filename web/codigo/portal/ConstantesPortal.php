@@ -41,8 +41,7 @@ define ('TEMPLATE_HISTORIA', "{$_SERVER ['DOCUMENT_ROOT']}/arquivos/AnaliseFunci
  * @param Exception $ex
  * @throws Exception
  */
-function trataErro ($msg, Exception $ex = null)
-{
+function trataErro(string $msg, Exception $ex = null) {
     if (DEBUG)
     {
         $msg = str_replace("\n", "<br>", $msg);

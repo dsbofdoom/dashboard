@@ -44,7 +44,7 @@
                 <w:rPr>
                     <w:sz w:val="28"/>
                 </w:rPr>
-                <w:t>2454</w:t>
+                <w:t>6640</w:t>
             </w:r>
         </w:p>
         <w:p w:rsidR="003948D1" w:rsidRPr="004E74F4" w:rsidRDefault="000A50E8">
@@ -953,7 +953,7 @@
                 <w:rPr>
                     <w:lang w:val="pt-BR" w:eastAsia="en-US"/>
                 </w:rPr>
-                <w:t>Acelerar o trâmite da demanda</w:t>
+                <w:t>Poder filtrar demandas que estão ou não no fluxo administrativo.</w:t>
             </w:r>
             <w:bookmarkEnd w:id="3"/>
         </w:p>
@@ -1062,7 +1062,7 @@
                 <w:rPr>
                     <w:lang w:val="pt-BR" w:eastAsia="en-US"/>
                 </w:rPr>
-                <w:t></w:t>
+                <w:t>O objetivo desta inclusão do novo filtro, campo Fluxo Administrativo, é poder criar mais uma alternativa de pesquisa das demandas em que se encontram em fluxo administrativo.</w:t>
             </w:r>
         </w:p>
         <w:tbl>
@@ -1617,7 +1617,7 @@
                 <w:rPr>
                     <w:lang w:eastAsia="en-US"/>
                 </w:rPr>
-                <w:t> Quando uma demanda estiver no estado "Intervenção Gestor FIES", deve aparecer a opção de tramitação para o 4o nível</w:t>
+                <w:t>Menu Principal > Pesquisa Avançada Deve ser incluído em Pesquisa Avançada o seguinte campo para pesquisa: Fluxo Administrativo: combobox com os seguintes valores - Sim, Não e Todas.</w:t>
             </w:r>
         </w:p>
         <w:p w:rsidR="003948D1" w:rsidRPr="004E74F4" w:rsidRDefault="000A50E8" w:rsidP="00AC44C4">
