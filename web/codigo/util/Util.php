@@ -290,4 +290,23 @@ class Util
         }
         rmdir($dir);
     }
+
+    public static function preparaPopOver (string $glue, string $label, string $value, array $dados)
+    {
+        $aux = [];
+
+        foreach ($dados as $item)
+        {
+            $valor = html_entity_decode(strip_tags($item->{$value}));
+
+            if (strlen($valor) > 2000)
+            {
+                $valor = substr($valor, 0, 2000) . '...';
+            }
+
+            $aux[] = htmlspecialchars($item->{$label} . $valor . '<br>');
+        }
+
+        return (string)implode($glue, $aux);
+    }
 }

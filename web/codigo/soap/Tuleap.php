@@ -1,6 +1,7 @@
 <?php
 
 require_once($_SERVER ['DOCUMENT_ROOT'] . "/codigo/soap/TuleapStatic.php");
+require_once($_SERVER ['DOCUMENT_ROOT'] . "/codigo/dao/UsuarioDAO.php");
 
 /**
  * Created by PhpStorm.
@@ -22,7 +23,7 @@ class Tuleap extends TuleapStatic
     private $session_hash;
 
     private $dados;
-
+    private $users = [];
 
     /**
      * Busca no WS os dados de Group
@@ -56,6 +57,56 @@ class Tuleap extends TuleapStatic
     }
 
     /**
+     * Busca no WS os dados de Artifacts e trata os valores
+     * @return mixed
+     */
+    public function buscaDadosArtifacts ()
+    {
+        $this->buscaDadosTracker();
+
+        error_log('Buscando Artifacts');
+
+        foreach ($this->dados as $key => $value)
+        {
+            foreach ($this->dados[$key]->tracker as $key2 => $value2)
+            {
+                $this->dados[$key]->tracker[$key2]->artifacts = self::trataValoresArtifacts($this->client_tracker->getArtifacts($this->session_hash, $value->group_id, $value2->tracker_id)->artifacts);
+            }
+        }
+        error_log('Buscando Artifacts finalizado');
+
+        return $this->dados;
+    }
+
+    /**
+     * Busca no WS os dados de Usuario e trata os valores
+     * @return mixed
+     */
+    public function buscaDadosUsuario ()
+    {
+        $this->buscaDadosArtifacts();
+
+        error_log('Buscando Usuario');
+
+        foreach ($this->dados as $key => $value)
+        {
+            foreach ($this->dados[$key]->tracker as $key2 => $value2)
+            {
+                foreach ($this->dados[$key]->tracker[$key2]->artifacts as $artefato)
+                {
+                    if (!key_exists($artefato->submitted_by, $this->users))
+                    {
+                        $this->users[$artefato->submitted_by] = $this->client_login->getUserInfo($this->session_hash, $artefato->submitted_by);
+                    }
+                }
+            }
+        }
+        error_log('Buscando Usuario finalizado');
+
+        return $this->dados;
+    }
+
+    /**
      * Busca e insere os dados de projeto
      * @return string com arvore dos dados
      */
@@ -76,7 +127,7 @@ class Tuleap extends TuleapStatic
     {
         $this->buscaDadosTracker();
 
-        self::inserirProjeto($this->dados);
+        self::inserirTracker($this->dados);
 
         return Util::printInTree($this->dados);
     }
@@ -107,26 +158,13 @@ class Tuleap extends TuleapStatic
         return Util::printInTree($this->dados);
     }
 
-    /**
-     * Busca no WS os dados de Artifacts e trata os valores
-     * @return mixed
-     */
-    public function buscaDadosArtifacts ()
+    public function inserirDadosUsuario ()
     {
-        $this->buscaDadosTracker();
+        $this->buscaDadosUsuario();
+        
+        self::inserirUsuario($this->users);
 
-        error_log('Buscando Artifacts');
-
-        foreach ($this->dados as $key => $value)
-        {
-            foreach ($this->dados[$key]->tracker as $key2 => $value2)
-            {
-                $this->dados[$key]->tracker[$key2]->artifacts = self::trataValoresArtifacts($this->client_tracker->getArtifacts($this->session_hash, $value->group_id, $value2->tracker_id)->artifacts);
-            }
-        }
-        error_log('Buscando Artifacts finalizado');
-
-        return $this->dados;
+        return Util::printInTree($this->users);
     }
 
     /**
@@ -160,18 +198,23 @@ class Tuleap extends TuleapStatic
 
         $this->client_project = new SoapClient(self::HOST_PROJECT, $SOAP_OPTION);
         $this->client_tracker = new SoapClient(self::HOST_TRACKER, $SOAP_OPTION);
-        
-        echo '<pre><b>Project</b><br>';
-        foreach ($this->client_project->__getFunctions() as $function)
-        {
-            echo "$function<br>";
-        }
-        echo '<b>Tracker</b><br>';
-        foreach ($this->client_tracker->__getFunctions() as $function)
-        {
-            echo "$function<br>";
-        }
-        echo '</pre>';
+
+//        echo '<pre><b>Project</b><br>';
+//        foreach ($this->client_project->__getFunctions() as $function)
+//        {
+//            echo "$function<br>";
+//        }
+//        echo '<br><b>Tracker</b><br>';
+//        foreach ($this->client_tracker->__getFunctions() as $function)
+//        {
+//            echo "$function<br>";
+//        }
+//        echo '<br><b>Login</b><br>';
+//        foreach ($this->client_login->__getFunctions() as $function)
+//        {
+//            echo "$function<br>";
+//        }
+//        echo '</pre>';
         error_log('WS conectados');
     }
 }

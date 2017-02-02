@@ -22,13 +22,17 @@ $cargas = [
         'TIPO' => 'artifacts',
         'NOME' => 'Artefato',
         'FUNC' => 'inserirDadosArtifacts'
+    ],
+    [
+        'TIPO' => 'usuario',
+        'NOME' => 'Usuario',
+        'FUNC' => 'inserirDadosUsuario'
     ]
 ];
 
 $saida = '';
 $time_start = microtime(true);
-
-$tuleap = new Tuleap('saulocorreia', 'Carol010');
+$tuleap = new Tuleap($_SESSION ['TULEAP_USER'], $_SESSION ['TULEAP_PASS']);
 foreach ($cargas as $index => $item)
 {
     if (isset($_POST[$item['TIPO']]))

@@ -22,7 +22,7 @@ if (!empty ($_GET ["id"]))
         $tpl->SCRIPT_PERFIL = Util::SendReadyScript('$("#perfil").val("' . $row->perfil . '");');
 
         // preenche valor dos campos text
-        $tpl->VALUE_ID_USUARIO = $row->id_usuario;
+        $tpl->VALUE_ID_USUARIO = $row->usuario_id;
         $tpl->VALUE_NOME = $row->nome;
         $tpl->VALUE_EMAIL = $row->usuario;
 
@@ -44,7 +44,7 @@ else
 
         $row = UtilDAO::getResult(Querys::SELECT_USUARIO_BY_ID, $_SESSION ["ID_USUARIO"])[0];
         $tpl->VALUE_NOME = $row->nome;
-        $tpl->VALUE_ID_USUARIO = $row->id_usuario;
+        $tpl->VALUE_ID_USUARIO = $row->usuario_id;
         $tpl->VALUE_EMAIL = $row->usuario;
         $tpl->VALUE_TULEAP_USER = $row->tuleap_user;
         $tpl->VALUE_TULEAP_PASS = $row->tuleap_pass;

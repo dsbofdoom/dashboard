@@ -26,8 +26,9 @@ foreach ($result as $row)
 
     }
 
-    $tpl->FIELD_VALUE = $row->field_value;
-    $tpl->QTD = $row->qtd;
+    $tpl->TYPE = $row->type;
+    $tpl->QTD = $row->qtd_aberto;
+    $tpl->TOTAL = $row->qtd;
     $tpl->block('BLOCK_STATUS');
 }
 

@@ -24,12 +24,20 @@ class TuleapStatic
             );
             if (count($existe) > 0)
             {
-                $querys[] = UtilDAO::MontarQuery(Querys::UPDATE_PROJETO,
-                    $value->group_name
-                    , $value->unix_group_name
-                    , $value->description
-                    , $value->group_id
-                );
+                $existe = $existe[0];
+
+                if ($value->group_name != $existe->group_name
+                    || $value->unix_group_name != $existe->unix_group_name
+                    || $value->description != $existe->description
+                )
+                {
+                    $querys[] = UtilDAO::MontarQuery(Querys::UPDATE_PROJETO,
+                        $value->group_name
+                        , $value->unix_group_name
+                        , $value->description
+                        , $value->group_id
+                    );
+                }
             }
             else
             {
@@ -58,13 +66,22 @@ class TuleapStatic
                 );
                 if (count($existe) > 0)
                 {
-                    $querys[] = UtilDAO::MontarQuery(Querys::UPDATE_TRACKER,
-                        $value2->group_id
-                        , $value2->name
-                        , $value2->description
-                        , $value2->item_name
-                        , $value2->tracker_id
-                    );
+                    $existe = $existe[0];
+
+                    if ($value2->group_id != $existe->group_id
+                        || $value2->name != $existe->name
+                        || $value2->description != $existe->description
+                        || $value2->item_name != $existe->item_name
+                    )
+                    {
+                        $querys[] = UtilDAO::MontarQuery(Querys::UPDATE_TRACKER,
+                            $value2->group_id
+                            , $value2->name
+                            , $value2->description
+                            , $value2->item_name
+                            , $value2->tracker_id
+                        );
+                    }
                 }
                 else
                 {
@@ -190,23 +207,26 @@ class TuleapStatic
                 Querys::SELECT_ARTIFACT_BY_ID
                 , $value3->artifact_id
             );
+
             if (count($existe) > 0)
             {
                 $existe = $existe[0];
                 if ($existe->tracker_id != $value3->tracker_id
-                    || $existe->submitted_by != Util::trataData($value3->submitted_by)
+                    || $existe->submitted_by != $value3->submitted_by
                     || $existe->submitted_on != Util::trataData($value3->submitted_on)
                     || $existe->last_update_date != Util::trataData($value3->last_update_date)
                     || $existe->artifact_id != $value3->artifact_id
                     || $existe->group_id != $value2->group_id
+                    || $existe->type != $value3->type
                 )
                 {
                     $querysThread[] = UtilDAO::MontarQuery(Querys::UPDATE_ARTIFACT,
                         $value3->tracker_id
                         , $value2->group_id
-                        , Util::trataData($value3->submitted_by)
+                        , $value3->submitted_by
                         , Util::trataData($value3->submitted_on)
                         , Util::trataData($value3->last_update_date)
+                        , $value3->type
                         , $value3->artifact_id
                     );
                 }
@@ -220,11 +240,38 @@ class TuleapStatic
                     , Util::trataData($value3->submitted_by)
                     , Util::trataData($value3->submitted_on)
                     , Util::trataData($value3->last_update_date)
+                    , $value3->type
                 );
             }
         }
 
         self::inserirDados('Artifacts', $querysThread);
+    }
+
+    protected static function inserirUsuario (array $users)
+    {
+        $querysThread = [];
+        foreach ($users as $index => $user)
+        {
+            $existe = UtilDAO::getResult(
+                Querys::SELECT_USUARIO_BY_ID
+                , $index
+            );
+
+            if (count($existe) == 0)
+            {
+                $querysThread[] = UtilDAO::MontarQuery(Querys::INSERT_USUARIO_TULEAP,
+                    $user->id,
+                    $user->real_name,
+                    $user->username,
+                    md5(UsuarioDAO::SENHA_PADRAO),
+                    PERFIL_2_CONSULTA,
+                    $user->username
+                );
+            }
+        }
+
+        self::inserirDados('Usuarios', $querysThread);
     }
 
     protected static function inserirDados (string $nome, array $querys)
@@ -242,8 +289,10 @@ class TuleapStatic
 
     protected static function trataValoresArtifacts ($dados)
     {
+
         foreach ($dados as $key3 => &$value3)
         {
+            $tipo = '';
             foreach ($value3->value as $key4 => &$value4)
             {
                 if (property_exists($value4->field_value, 'value'))
@@ -271,9 +320,54 @@ class TuleapStatic
                         $value4->field_value = $value4->field_value->bind_value;
                     }
                 }
+
+                if ($value4->field_name == 'estimated_effort_points')
+                {
+                    $tipo = 'story';
+                }
+                elseif ($value4->field_name == 'sprint_name')
+                {
+                    $tipo = 'sprint';
+                }
+                elseif ($value4->field_name == 'progress')
+                {
+                    $tipo = 'release';
+                }
+                elseif ($value4->field_label == 'Descrição da Tarefa')
+                {
+                    $tipo = 'task';
+                }
+            }
+
+            $value3->type = $tipo;
+        }
+
+        return $dados;
+    }
+
+    protected static function buscaValor (array $dados, string $busca, string $variavelBusca, string $variavelResposta)
+    {
+        foreach ($dados as $index => $dado)
+        {
+            if ($dado->{$variavelBusca} == $busca)
+            {
+                return $dado->{$variavelResposta};
             }
         }
-        
-        return $dados;
+
+        return (boolean)false;
+    }
+
+    protected static function existeValor (array $dados, string $busca, string $variavelBusca, string $variavelResposta)
+    {
+        foreach ($dados as $index => $dado)
+        {
+            if ($dado->{$variavelBusca} == $busca)
+            {
+                return true;
+            }
+        }
+
+        return (boolean)false;
     }
 }

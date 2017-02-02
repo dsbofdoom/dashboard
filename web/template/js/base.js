@@ -138,7 +138,8 @@ function ajax(endereco, dados, success) {
 
 function adicionar(campo) {
     // Busca por '"form_" + campo' e append em '"campos_" + campo'
-    var campos = $("#campos_" + campo), id = campos.find("div").length + 1;
+    var campos = $("#campos_" + campo),
+        id = campos.find("div").length + 1;
 
     $("<div/>", {
         id: campo + id

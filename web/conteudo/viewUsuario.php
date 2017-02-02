@@ -35,7 +35,7 @@ if (!empty ($_POST))
     }
     foreach (UtilDAO::getResultArrayParam(Querys::SELECT_USUARIO . $where, $parametro) as $row)
     {
-        $tpl->ID_USUARIO = $row->id_usuario;
+        $tpl->ID_USUARIO = $row->usuario_id;
         $tpl->NOME = $row->nome;
         $tpl->EMAIL = $row->usuario;
 
