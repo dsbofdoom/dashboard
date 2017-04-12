@@ -44,7 +44,7 @@
                 <w:rPr>
                     <w:sz w:val="28"/>
                 </w:rPr>
-                <w:t>2454</w:t>
+                <w:t>8645</w:t>
             </w:r>
         </w:p>
         <w:p w:rsidR="003948D1" w:rsidRPr="004E74F4" w:rsidRDefault="000A50E8">
@@ -83,14 +83,6 @@
                 <w:t>Registrar as funcionalidades identificadas em uma história, com foco nas necessidades do usuário (foco negocial), para fins de contagem de pontos de função.
                 </w:t>
             </w:r>
-        </w:p>
-        <w:p w:rsidR="003948D1" w:rsidRPr="004E74F4" w:rsidRDefault="003948D1">
-            <w:pPr>
-                <w:pStyle w:val="Pargrafo"/>
-                <w:rPr>
-                    <w:lang w:val="pt-BR" w:eastAsia="en-US"/>
-                </w:rPr>
-            </w:pPr>
         </w:p>
         <w:p w:rsidR="003948D1" w:rsidRPr="004E74F4" w:rsidRDefault="000A50E8">
             <w:pPr>
@@ -908,7 +900,7 @@
                                 <w:color w:val="00000A"/>
                                 <w:lang w:eastAsia="en-US"/>
                             </w:rPr>
-                            <w:t>https://svn.mec.gov.br/simec/simec/trunk/docs/01-Especificacao/Banco de dados/Modelo de dados/</w:t>
+                            <w:t>https://svn.mec.gov.br/simec/simec/trunk/docs/01-Especificacao/Banco de dados/Modelo de dados/mer_projovemurbano2/</w:t>
                         </w:r>
                     </w:p>
                 </w:tc>
@@ -953,7 +945,7 @@
                 <w:rPr>
                     <w:lang w:val="pt-BR" w:eastAsia="en-US"/>
                 </w:rPr>
-                <w:t>Acelerar o trâmite da demanda</w:t>
+                <w:t>Aprovar uma solicitação de polo</w:t>
             </w:r>
             <w:bookmarkEnd w:id="3"/>
         </w:p>
@@ -1585,6 +1577,61 @@
                 </w:tc>
             </w:tr>
         </w:tbl>
+        <w:p w:rsidR="003172FD" w:rsidRPr="003172FD" w:rsidRDefault="000A50E8" w:rsidP="00762825">
+            <w:pPr>
+                <w:pStyle w:val="Ttulo3"/>
+                <w:numPr>
+                    <w:ilvl w:val="2"/>
+                    <w:numId w:val="2"/>
+                </w:numPr>
+                <w:ind w:left="720" w:hanging="720"/>
+                <w:rPr>
+                    <w:lang w:val="pt-BR"/>
+                </w:rPr>
+            </w:pPr>
+            <w:bookmarkStart w:id="4" w:name="_Toc465173392"/>
+            <w:r w:rsidRPr="004E74F4">
+                <w:rPr>
+                    <w:lang w:val="pt-BR"/>
+                </w:rPr>
+                <w:lastRenderedPageBreak/>
+                <w:t>Interface do Usuário (telas)</w:t>
+            </w:r>
+            <w:bookmarkEnd w:id="4"/>
+        </w:p>
+        <w:p w:rsidR="001A107F" w:rsidRPr="00A22101" w:rsidRDefault="00A22101" w:rsidP="00A22101">
+            <w:pPr>
+                <w:spacing w:before="100" w:beforeAutospacing="1" w:after="100" w:afterAutospacing="1"/>
+                <w:ind w:left="360"/>
+                <w:jc w:val="left"/>
+                <w:rPr>
+                    <w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/>
+                    <w:color w:val="333333"/>
+                    <w:sz w:val="20"/>
+                    <w:lang w:eastAsia="en-US"/>
+                </w:rPr>
+            </w:pPr>
+            <w:r w:rsidRPr="00A22101">
+                <w:rPr>
+                    <w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/>
+                    <w:color w:val="333333"/>
+                    <w:sz w:val="20"/>
+                    <w:lang w:eastAsia="en-US"/>
+                </w:rPr>
+                <w:t>Print Screen</w:t>
+            </w:r>
+            <w:r>
+                <w:rPr>
+                    <w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/>
+                    <w:color w:val="333333"/>
+                    <w:sz w:val="20"/>
+                    <w:lang w:eastAsia="en-US"/>
+                </w:rPr>
+                <w:t>.</w:t>
+            </w:r>
+            <w:bookmarkStart w:id="5" w:name="_GoBack"/>
+            <w:bookmarkEnd w:id="5"/>
+        </w:p>
         <w:p w:rsidR="003948D1" w:rsidRPr="004E74F4" w:rsidRDefault="000A50E8">
             <w:pPr>
                 <w:pStyle w:val="Ttulo3"/>
@@ -1597,29 +1644,16 @@
                     <w:lang w:val="pt-BR"/>
                 </w:rPr>
             </w:pPr>
-            <w:bookmarkStart w:id="5" w:name="_Toc465173393"/>
+            <w:bookmarkStart w:id="6" w:name="_Toc465173393"/>
             <w:r w:rsidRPr="004E74F4">
                 <w:rPr>
                     <w:lang w:val="pt-BR"/>
                 </w:rPr>
                 <w:t>Modificações realizadas</w:t>
             </w:r>
-            <w:bookmarkEnd w:id="5"/>
+            <w:bookmarkEnd w:id="6"/>
         </w:p>
-        <w:p w:rsidR="00314E8E" w:rsidRDefault="004D6F7E" w:rsidP="006E1E7B">
-            <w:pPr>
-                <w:ind w:firstLine="708"/>
-                <w:rPr>
-                    <w:lang w:eastAsia="en-US"/>
-                </w:rPr>
-            </w:pPr>
-            <w:r>
-                <w:rPr>
-                    <w:lang w:eastAsia="en-US"/>
-                </w:rPr>
-                <w:t> Quando uma demanda estiver no estado "Intervenção Gestor FIES", deve aparecer a opção de tramitação para o 4o nível</w:t>
-            </w:r>
-        </w:p>
+        <w:p><w:pPr><w:rPr><w:lang w:eastAsia="en-US"/></w:rPr></w:pPr><w:r><w:rPr><w:lang w:eastAsia="en-US"/></w:rPr><w:t>Projovem Urbano 2 > Página inicial</w:t></w:r></w:p> <w:p><w:pPr><w:rPr><w:lang w:eastAsia="en-US"/></w:rPr></w:pPr><w:r><w:rPr><w:lang w:eastAsia="en-US"/></w:rPr><w:t>- Criar a funcionalidade de aprovação e rejeição de solicitação de criação de polo.</w:t></w:r></w:p><w:p><w:pPr><w:rPr><w:lang w:eastAsia="en-US"/></w:rPr></w:pPr><w:r><w:rPr><w:lang w:eastAsia="en-US"/></w:rPr><w:t>1 - Apresentar na tela inicial as solicitações de criação de polo para o município.</w:t></w:r></w:p><w:p><w:pPr><w:rPr><w:lang w:eastAsia="en-US"/></w:rPr></w:pPr><w:r><w:rPr><w:lang w:eastAsia="en-US"/></w:rPr><w:t>Colunas: UF, Município, Nome do polo, Endereço.</w:t></w:r></w:p><w:p><w:pPr><w:rPr><w:lang w:eastAsia="en-US"/></w:rPr></w:pPr><w:r><w:rPr><w:lang w:eastAsia="en-US"/></w:rPr><w:t>Ações:</w:t></w:r></w:p><w:p><w:pPr><w:rPr><w:lang w:eastAsia="en-US"/></w:rPr></w:pPr><w:r><w:rPr><w:lang w:eastAsia="en-US"/></w:rPr><w:t> Aprovar: Quando acionado deve liberar o polo para o município, e ser apresentado no cadastro de polo e núcleo do município correspondente.</w:t></w:r></w:p><w:p><w:pPr><w:rPr><w:lang w:eastAsia="en-US"/></w:rPr></w:pPr><w:r><w:rPr><w:lang w:eastAsia="en-US"/></w:rPr><w:t> Recusar: Quando acionado deve alterar a situação do polo para "Rejeitado" e ser apresentado no cadastro de polo e núcleo do município correspondente como rejeitado.</w:t></w:r></w:p><w:p><w:pPr><w:rPr><w:lang w:eastAsia="en-US"/></w:rPr></w:pPr><w:r><w:rPr><w:lang w:eastAsia="en-US"/></w:rPr><w:t>RC - Após a liberação ou rejeição de um polo, este deve sair da listagem de solicitações de criação de polo.</w:t></w:r></w:p><w:p><w:pPr><w:rPr><w:lang w:eastAsia="en-US"/></w:rPr></w:pPr><w:r><w:rPr><w:lang w:eastAsia="en-US"/></w:rPr><w:t></w:t></w:r></w:p>
         <w:p w:rsidR="003948D1" w:rsidRPr="004E74F4" w:rsidRDefault="000A50E8" w:rsidP="00AC44C4">
             <w:pPr>
                 <w:pStyle w:val="Ttulo1"/>
@@ -1627,15 +1661,14 @@
                     <w:lang w:val="pt-BR"/>
                 </w:rPr>
             </w:pPr>
-            <w:bookmarkStart w:id="6" w:name="_Toc465173394"/>
+            <w:bookmarkStart w:id="7" w:name="_Toc465173394"/>
             <w:r w:rsidRPr="004E74F4">
                 <w:rPr>
                     <w:lang w:val="pt-BR"/>
                 </w:rPr>
-                <w:lastRenderedPageBreak/>
                 <w:t>Considerações adicionais</w:t>
             </w:r>
-            <w:bookmarkEnd w:id="6"/>
+            <w:bookmarkEnd w:id="7"/>
         </w:p>
         <w:p w:rsidR="009F59E1" w:rsidRDefault="009F59E1" w:rsidP="009F59E1">
             <w:r>
