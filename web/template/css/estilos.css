@@ -124,8 +124,9 @@ li.opt.selected {
     margin-right: 1em !important;
 }
 
-.table > thead {
+.thead {
     background-color: rgba(60, 141, 188, 0.4);
+    padding: 5px;
 }
 
 .espace-artifact {
@@ -156,6 +157,7 @@ li.opt.selected {
 .task {
     background-color: #0FD8D8;
 }
+
 .unkown {
     color: black;
 }
@@ -166,5 +168,12 @@ li.opt.selected {
 }
 
 .popover {
-    max-width: 75% !important;
+    max-width: 50% !important;
+}
+
+.main-header .logo .logo-lg {
+    margin-top: 0px !important;
+    font-family: 'Gotham';
+    font-weight: bold;
+    font-variant: small-caps;
 }

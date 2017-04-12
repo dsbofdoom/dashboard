@@ -124,6 +124,7 @@ class Util
         {
             return "ASC";
         }
+
         return "DESC";
     }
 
@@ -205,6 +206,8 @@ class Util
         {
             return mkdir($pasta, null, true);
         }
+
+        return false;
     }
 
     public static function zipFile ($source, $destination, $remove = '')
@@ -231,49 +234,29 @@ class Util
                 $file = str_replace('\\', '/', $file);
 
                 // Ignore "." and ".." folders
-                if (in_array(substr($file, strrpos($file, '/') + 1), array('.', '..')))
+                if (in_array(substr($file, strrpos($file, '/') + 1), ['.', '..']) || "{$source}{$remove}" == $file)
                 {
                     continue;
                 }
-
 
                 if (is_dir($file) === true)
                 {
                     $zip->addEmptyDir(str_replace($source . '/', '', $file . '/'));
                 }
-                else
+                elseif (is_file($file) === true)
                 {
-                    if (is_file($file) === true)
-                    {
-                        $zip->addFromString(str_replace($source . '/', '', $file), file_get_contents(realpath($file)));
-                    }
+                    $zip->addFromString(str_replace($source . '/', '', $file), file_get_contents(realpath($file)));
                 }
             }
         }
-        else
+        elseif (is_file($source) === true)
         {
-            if (is_file($source) === true)
-            {
-                $zip->addFromString(basename($source), file_get_contents(realpath($source)));
-            }
+            $zip->addFromString(basename($source), file_get_contents(realpath($source)));
         }
 
         return $zip->close();
     }
 
-    public static function converterTemplate ($template, $search, $replace, $saida)
-    {
-        //open file and get data
-        $data = file_get_contents($template . "/word/document2.xml");
-
-        // do tag replacements or whatever you want
-        $data = str_replace($search, $replace, $data);
-
-        //save it back
-        file_put_contents($template . "/word/document.xml", $data);
-
-        return (bool)Util::zipFile($template, $saida);
-    }
 
     public static function removeDir ($dir)
     {
@@ -307,6 +290,6 @@ class Util
             $aux[] = htmlspecialchars($item->{$label} . $valor . '<br>');
         }
 
-        return (string)implode($glue, $aux);
+        return (string) implode($glue, $aux);
     }
 }

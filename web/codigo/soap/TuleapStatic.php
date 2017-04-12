@@ -22,24 +22,7 @@ class TuleapStatic
                 Querys::SELECT_PROJETO_BY_ID
                 , $value->group_id
             );
-            if (count($existe) > 0)
-            {
-                $existe = $existe[0];
-
-                if ($value->group_name != $existe->group_name
-                    || $value->unix_group_name != $existe->unix_group_name
-                    || $value->description != $existe->description
-                )
-                {
-                    $querys[] = UtilDAO::MontarQuery(Querys::UPDATE_PROJETO,
-                        $value->group_name
-                        , $value->unix_group_name
-                        , $value->description
-                        , $value->group_id
-                    );
-                }
-            }
-            else
+            if (count($existe) == 0)
             {
                 $querys[] = UtilDAO::MontarQuery(Querys::INSERT_PROJETO,
                     $value->group_id
@@ -47,6 +30,16 @@ class TuleapStatic
                     , $value->unix_group_name
                     , $value->description
                 );
+            }
+            else
+            {
+                $querys[] = UtilDAO::MontarQuery(Querys::UPDATE_PROJETO,
+                    $value->group_name
+                    , $value->unix_group_name
+                    , $value->description
+                    , $value->group_id
+                );
+
             }
         }
 
@@ -64,26 +57,8 @@ class TuleapStatic
                     Querys::SELECT_TRACKER_BY_ID
                     , $value2->tracker_id
                 );
-                if (count($existe) > 0)
-                {
-                    $existe = $existe[0];
 
-                    if ($value2->group_id != $existe->group_id
-                        || $value2->name != $existe->name
-                        || $value2->description != $existe->description
-                        || $value2->item_name != $existe->item_name
-                    )
-                    {
-                        $querys[] = UtilDAO::MontarQuery(Querys::UPDATE_TRACKER,
-                            $value2->group_id
-                            , $value2->name
-                            , $value2->description
-                            , $value2->item_name
-                            , $value2->tracker_id
-                        );
-                    }
-                }
-                else
+                if (count($existe) == 0)
                 {
                     $querys[] = UtilDAO::MontarQuery(Querys::INSERT_TRACKER,
                         $value2->tracker_id
@@ -93,11 +68,22 @@ class TuleapStatic
                         , $value2->item_name
                     );
                 }
+                else
+                {
+                    $querys[] = UtilDAO::MontarQuery(Querys::UPDATE_TRACKER,
+                        $value2->group_id
+                        , $value2->name
+                        , $value2->description
+                        , $value2->item_name
+                        , $value2->tracker_id
+                    );
+                }
             }
         }
 
         self::inserirDados('Tracker', $querys);
     }
+
 
     /**
      * Insere as Cross References de um Artefato
@@ -124,6 +110,7 @@ class TuleapStatic
                     break;
                 }
             }
+
             if ($falhou)
             {
                 $querysThread[] = UtilDAO::MontarQuery(
@@ -154,6 +141,12 @@ class TuleapStatic
 
         foreach ($artefato as $key3 => $value3)
         {
+
+            $querysThread[] = UtilDAO::MontarQuery(
+                Querys::DELETE_FIELD
+                , $value3->artifact_id
+            );
+
             foreach ($value3->value as $key4 => $value4)
             {
                 if (is_array($value4->field_value) || is_object($value4->field_value))
@@ -163,29 +156,13 @@ class TuleapStatic
 
                 $field_value = SQLite3::escapeString($value4->field_value);
 
-                $existe = UtilDAO::getResult(
-                    Querys::SELECT_FIELD_BY_ARTIF_ID_FIELD_NAME
+                $querysThread[] = UtilDAO::MontarQuery(
+                    Querys::INSERT_FIELD
                     , $value3->artifact_id
                     , $value4->field_name
+                    , $value4->field_label
+                    , $field_value
                 );
-                if (count($existe) == 0)
-                {
-                    $querysThread[] = UtilDAO::MontarQuery(
-                        Querys::INSERT_FIELD
-                        , $value3->artifact_id
-                        , $value4->field_name
-                        , $value4->field_label
-                        , $field_value
-                    );
-                }
-                elseif ($field_value != SQLite3::escapeString($existe[0]->field_value))
-                {
-                    $querysThread[] = UtilDAO::MontarQuery(
-                        Querys::UPDATE_FIELD
-                        , $field_value
-                        , $existe[0]->field_id
-                    );
-                }
             }
         }
 
@@ -203,46 +180,20 @@ class TuleapStatic
 
         foreach ($artifacts as $key3 => $value3)
         {
-            $existe = UtilDAO::getResult(
-                Querys::SELECT_ARTIFACT_BY_ID
-                , $value3->artifact_id
+            $querysThread[] = UtilDAO::MontarQuery(Querys::DELETE_ARTIFACT,
+                $value3->artifact_id
             );
 
-            if (count($existe) > 0)
-            {
-                $existe = $existe[0];
-                if ($existe->tracker_id != $value3->tracker_id
-                    || $existe->submitted_by != $value3->submitted_by
-                    || $existe->submitted_on != Util::trataData($value3->submitted_on)
-                    || $existe->last_update_date != Util::trataData($value3->last_update_date)
-                    || $existe->artifact_id != $value3->artifact_id
-                    || $existe->group_id != $value2->group_id
-                    || $existe->type != $value3->type
-                )
-                {
-                    $querysThread[] = UtilDAO::MontarQuery(Querys::UPDATE_ARTIFACT,
-                        $value3->tracker_id
-                        , $value2->group_id
-                        , $value3->submitted_by
-                        , Util::trataData($value3->submitted_on)
-                        , Util::trataData($value3->last_update_date)
-                        , $value3->type
-                        , $value3->artifact_id
-                    );
-                }
-            }
-            else
-            {
-                $querysThread[] = UtilDAO::MontarQuery(Querys::INSERT_ARTIFACT,
-                    $value3->artifact_id
-                    , $value3->tracker_id
-                    , $value2->group_id
-                    , Util::trataData($value3->submitted_by)
-                    , Util::trataData($value3->submitted_on)
-                    , Util::trataData($value3->last_update_date)
-                    , $value3->type
-                );
-            }
+            $querysThread[] = UtilDAO::MontarQuery(Querys::INSERT_ARTIFACT,
+                $value3->artifact_id
+                , $value3->tracker_id
+                , $value2->group_id
+                , Util::trataData($value3->submitted_by)
+                , Util::trataData($value3->submitted_on)
+                , Util::trataData($value3->last_update_date)
+                , $value3->type
+            );
+
         }
 
         self::inserirDados('Artifacts', $querysThread);
@@ -287,7 +238,7 @@ class TuleapStatic
     }
 
 
-    protected static function trataValoresArtifacts ($dados)
+    protected static function trataValoresArtifacts (array $dados)
     {
 
         foreach ($dados as $key3 => &$value3)
@@ -355,7 +306,7 @@ class TuleapStatic
             }
         }
 
-        return (boolean)false;
+        return (boolean) false;
     }
 
     protected static function existeValor (array $dados, string $busca, string $variavelBusca, string $variavelResposta)
@@ -368,6 +319,6 @@ class TuleapStatic
             }
         }
 
-        return (boolean)false;
+        return (boolean) false;
     }
 }

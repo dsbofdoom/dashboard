@@ -1,8 +1,5 @@
 <?php
 
-require_once($_SERVER ['DOCUMENT_ROOT'] . "/codigo/soap/TuleapStatic.php");
-require_once($_SERVER ['DOCUMENT_ROOT'] . "/codigo/dao/UsuarioDAO.php");
-
 /**
  * Created by PhpStorm.
  * User: saulocorreia
@@ -34,7 +31,7 @@ class Tuleap extends TuleapStatic
 
         register_shutdown_function('generateCallTrace', new Exception());
 
-        set_time_limit(600);
+        set_time_limit(0);
 
         error_log('Buscando Projetos');
         $this->dados = $this->client_login->getMyProjects($this->session_hash);

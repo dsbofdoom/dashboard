@@ -154,3 +154,15 @@ function adicionar(campo) {
         $("#" + botao.attr("data-map")).remove();
     });
 }
+
+function forceRequired(atual, campos){
+    if ($(atual).val().length == 0){
+        $.each(campos, function (index, item) {
+            $("#" + item).removeAttr('required');
+        });
+    } else {
+        $.each(campos, function (index, item) {
+            $("#" + item).attr('required', 'required');
+        });
+    }
+}

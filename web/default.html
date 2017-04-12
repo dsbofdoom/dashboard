@@ -1,26 +1,24 @@
 <div class="box-header with-border">
     <!-- BEGIN BLOCK_GROUP -->
-    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 box box-info box-header form-group" style="width: calc(50% - 10px);margin: 5px;">
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 form-group text-center">
-            <a href="{DIRETORIO_CONTEUDO}/group.php?group_id={GROUP_ID}">{GROUP_NAME}</a>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="line-height: 1.5em;">
-            <table class="table text-center">
-                <thead>
-                <tr>
-                    <th class="col-xs-6 col-sm-6 col-md-6 col-lg-6">Status</th>
-                    <th>Artefatos Abertos</th>
-                    <th>Total de Artefatos</th>
-                </tr>
-                </thead>
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4" style="padding-right: 5px; padding-left: 5px;">
+        <div class="box box-info box-header form-group">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 form-group text-center">
+                <a href="{DIRETORIO_CONTEUDO}/group.php?group_id={GROUP_ID}">{GROUP_NAME}</a>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 table" style="line-height: 1.5em;">
+                <div class="row text-center bold thead">
+                    <div class="col-xs-2 col-sm-4 col-md-2 col-lg-2">Status</div>
+                    <div class="col-xs-5 col-sm-4 col-md-5 col-lg-5">Artefatos Abertos</div>
+                    <div class="col-xs-5 col-sm-4 col-md-5 col-lg-5">Total de Artefatos</div>
+                </div>
                 <!-- BEGIN BLOCK_STATUS -->
-                <tr class="par_impar">
-                    <td>{TYPE}</td>
-                    <td>{QTD}</td>
-                    <td>{TOTAL}</td>
-                </tr>
+                <div class="row par_impar text-center">
+                    <div class="col-xs-2 col-sm-4 col-md-2 col-lg-2">{TYPE}</div>
+                    <div class="col-xs-5 col-sm-4 col-md-5 col-lg-5">{QTD}</div>
+                    <div class="col-xs-5 col-sm-4 col-md-5 col-lg-5">{TOTAL}</div>
+                </div>
                 <!-- END BLOCK_STATUS -->
-            </table>
+            </div>
         </div>
     </div>
     <!-- END BLOCK_GROUP -->

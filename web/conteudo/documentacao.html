@@ -1,25 +1,75 @@
-<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 form-group">
-    <div class="row col-xs-12 col-sm-12 col-md-12 col-lg-12 form-group">
-        <!-- BEGIN PRE_BLOCK_GROUP -->
-        <div class="row col-xs-12 col-sm-12 col-md-12 col-lg-12 form-group">
-            Escolha o Projeto:
-        </div>
-        <!-- BEGIN BLOCK_GROUP -->
-        <div class="row col-xs-12 col-sm-12 col-md-12 col-lg-12 par_impar">
-            <a href="?group_id={GROUP_ID}">{GROUP_NAME} ({UNIX_GROUP_NAME})</a>
-        </div>
-        <!-- END BLOCK_GROUP -->
-        <!-- END PRE_BLOCK_GROUP -->
+<script type="text/javascript">
+    function submit(comando) {
+        var falha = false, inputs = $(event.target).closest("form").find(":input[required]");
+        $("label").css("color", "");
+        for (var i = 0; i < inputs.length; i++) {
+            var input = $(inputs[i]);
 
-        <!-- BEGIN PRE_BLOCK_RELEASE -->
-        <div class="row col-xs-12 col-sm-12 col-md-12 col-lg-12 form-group">
-            Escolha a Release:
+            if (input.val() == "") {
+                var label = $("label[for='" + input.prop("id") + "']").css("color", "red");
+                if (!falha)
+                    input.focus();
+                falha = true;
+            }
+        }
+
+        if (falha) {
+            $.notify("Favor preencher os campos obrigatórios (em vermelho).", "error");
+            return;
+        }
+
+        ajax("{CHAMADA_AJAX}", $(event.target).closest("form").serialize() + "&comando=" + comando, function (dados) {
+            if (dados.retorno)
+                setTimeout(function () {
+                    window.location = "{PAGINA_RETORNO}";
+                }, 2000);
+        });
+    }
+</script>
+<!-- BEGIN PRE_BLOCK_GROUP -->
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 box-header form-group">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center bold thead">
+        Escolha o projeto:
+    </div>
+    <!-- BEGIN BLOCK_GROUP -->
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 par_impar">
+        <a href="?group_id={GROUP_ID}">{GROUP_NAME} ({UNIX_GROUP_NAME})</a>
+    </div>
+    <!-- END BLOCK_GROUP -->
+</div>
+<!-- END PRE_BLOCK_GROUP -->
+
+<!-- BEGIN PRE_BLOCK_RELEASE -->
+<div class="box-header form-group">
+    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 form-group">
+        <div class="row col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center bold thead">
+            Release do <b>{GROUP_NAME}</b>
         </div>
         <!-- BEGIN BLOCK_RELEASE -->
-        <div class="row col-xs-12 col-sm-12 col-md-12 col-lg-12 par_impar">
+        <div class="row col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center par_impar">
             <a href="?group_id={GROUP_ID}&sprint={SPRINT}">{RELEASE}</a>
         </div>
         <!-- END BLOCK_RELEASE -->
-        <!-- END PRE_BLOCK_RELEASE -->
+    </div>
+    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 form-group">
+        <div class="row text-center bold thead form-group">
+            Configuração
+        </div>
+        <form id="formulario" action="javascript:submit({ID_JSON});">
+            <input type="hidden" name="group_id" id="group_id" value="{GROUP_ID}">
+            <div class="row form-group">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <label for="unix_name">Nome do Schema</label>
+                    <input type="text" name="unix_name" id="unix_name" value="{UNIX_NAME}" class="form-control">
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-xs-12 col-sm-offset-3 col-sm-6 col-md-offset-4 col-md-4 col-lg-4">
+                    <input class="form-control btn btn-primary btn-block" type="button" onclick="submit();" value="Salvar" id="botao_salvar">
+                </div>
+            </div>
+        </form>
     </div>
 </div>
+<!-- END PRE_BLOCK_RELEASE -->
+

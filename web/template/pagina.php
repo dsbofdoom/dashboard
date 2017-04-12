@@ -1,11 +1,5 @@
 <?php
 require_once($_SERVER ['DOCUMENT_ROOT'] . "/codigo/portal/ConstantesPortal.php");
-require_once($_SERVER ['DOCUMENT_ROOT'] . "/codigo/dao/UtilDAO.php");
-require_once($_SERVER ['DOCUMENT_ROOT'] . "/codigo/dao/Querys.php");
-require_once($_SERVER ['DOCUMENT_ROOT'] . "/codigo/controle/Sessao.php");
-require_once($_SERVER ['DOCUMENT_ROOT'] . "/codigo/portal/Menu.php");
-require_once($_SERVER ['DOCUMENT_ROOT'] . "/codigo/util/Template.php");
-require_once($_SERVER ['DOCUMENT_ROOT'] . "/codigo/util/Util.php");
 
 $tpl = new Template ($_SERVER ['DOCUMENT_ROOT'] . "/template/pagina.html", true);
 

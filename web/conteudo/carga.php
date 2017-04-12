@@ -1,6 +1,5 @@
 <?php
 require_once($_SERVER ['DOCUMENT_ROOT'] . "/template/pagina.php");
-require_once($_SERVER ['DOCUMENT_ROOT'] . "/codigo/soap/Tuleap.php");
 
 $tpl->CAMINHO_PAGINA = "";
 $tpl->NOME_PAGINA = "";

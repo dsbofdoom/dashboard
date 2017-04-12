@@ -80,69 +80,77 @@ SQL;
     // ############################################################
     // ##........................USUARIO.........................##
     // ############################################################
-    const SELECT_LOGIN = "SELECT * FROM tb_usuario WHERE usuario = ? and senha = ? and ativo = 'S'";
-    const SELECT_USUARIO_BY_USUARIO_ATIVO = "SELECT * FROM tb_usuario WHERE usuario = ? AND ativo = 'S'";
-    const SELECT_USUARIO = "SELECT * FROM tb_usuario WHERE 1 = 1 ORDER BY nome";
-    const SELECT_USUARIO_BY_ID = "SELECT * FROM tb_usuario WHERE usuario_id = ? ";
+    const SELECT_LOGIN = 'SELECT * FROM tb_usuario WHERE usuario = ? and senha = ? and ativo = \'S\'';
+    const SELECT_USUARIO_BY_USUARIO_ATIVO = 'SELECT * FROM tb_usuario WHERE usuario = ? AND ativo = \'S\'';
+    const SELECT_USUARIO = 'SELECT * FROM tb_usuario WHERE 1 = 1 ORDER BY nome';
+    const SELECT_USUARIO_BY_ID = 'SELECT * FROM tb_usuario WHERE usuario_id = ? ';
 
-    const INSERT_USUARIO = "INSERT INTO tb_usuario (nome,usuario,senha,perfil) VALUES (?,?,?,?)";
-    const INSERT_USUARIO_TULEAP = "INSERT INTO tb_usuario (usuario_id,nome,usuario,senha,perfil,tuleap_user) VALUES (?,?,?,?,?,?)";
+    const INSERT_USUARIO = 'INSERT INTO tb_usuario (nome,usuario,senha,perfil) VALUES (?,?,?,?)';
+    const INSERT_USUARIO_TULEAP = 'INSERT INTO tb_usuario (usuario_id,nome,usuario,senha,perfil,tuleap_user) VALUES (?,?,?,?,?,?)';
 
-    const UPDATE_USUARIO = "UPDATE tb_usuario SET nome = ?, usuario = ? WHERE usuario_id = ?";
-    const UPDATE_USUARIO_PERFIL = "UPDATE tb_usuario SET nome = ?, usuario = ?, perfil = ? WHERE usuario_id = ?";
-    const UPDATE_USUARIO_ATIVO = "UPDATE tb_usuario SET ativo = ? WHERE usuario_id = ?";
-    const UPDATE_USUARIO_SENHA = "UPDATE tb_usuario SET nome = ?, usuario = ?, senha = ?, tuleap_user = ?, tuleap_pass = ? WHERE usuario_id = ?";
-    const UPDATE_USUARIO_RESET_SENHA = "UPDATE tb_usuario SET senha = ? WHERE usuario_id = ?";
+    const UPDATE_USUARIO = 'UPDATE tb_usuario SET nome = ?, usuario = ? WHERE usuario_id = ?';
+    const UPDATE_USUARIO_PERFIL = 'UPDATE tb_usuario SET nome = ?, usuario = ?, perfil = ? WHERE usuario_id = ?';
+    const UPDATE_USUARIO_ATIVO = 'UPDATE tb_usuario SET ativo = ? WHERE usuario_id = ?';
+    const UPDATE_USUARIO_SENHA = 'UPDATE tb_usuario SET nome = ?, usuario = ?, senha = ?, tuleap_user = ?, tuleap_pass = ? WHERE usuario_id = ?';
+    const UPDATE_USUARIO_RESET_SENHA = 'UPDATE tb_usuario SET senha = ? WHERE usuario_id = ?';
 
     // ############################################################
     // ##.........................GROUP..........................##
     // ############################################################
-    const SELECT_PROJETO = "SELECT group_id, unix_group_name, group_name FROM tb_group ORDER BY 3, 2";
-    const SELECT_PROJETO_BY_ID = "SELECT * FROM tb_group WHERE group_id = ?";
-    const SELECT_PROJETO_BY_ARTIFACT_ID = "SELECT g.* FROM tb_group g JOIN tb_artifact a USING (group_id) WHERE a.artifact_id = ?";
+    const SELECT_PROJETO = 'SELECT group_id, unix_group_name, group_name FROM tb_group ORDER BY 3, 2';
+    const SELECT_PROJETO_BY_ID = 'SELECT * FROM tb_group WHERE group_id = ?';
+    const SELECT_PROJETO_CONF_BY_ID = 'SELECT g.group_id, g.group_name, g.description, g.data_insercao, ifnull (c.unix_group_name, g.unix_group_name) unix_group_name FROM tb_group g LEFT JOIN tb_configuracao c USING (group_id) WHERE g.group_id = ?';
+    const SELECT_PROJETO_BY_ARTIFACT_ID = 'SELECT g.* FROM tb_group g JOIN tb_artifact a USING (group_id) WHERE a.artifact_id = ?';
 
-    const INSERT_PROJETO = "INSERT INTO tb_group (group_id, group_name, unix_group_name, description) VALUES (?,?,?,?)";
+    const INSERT_PROJETO = 'INSERT INTO tb_group (group_id, group_name, unix_group_name, description) VALUES (?,?,?,?)';
 
-    const UPDATE_PROJETO = "UPDATE tb_group SET group_name = ?, unix_group_name = ?, description = ? WHERE group_id = ?";
+    const UPDATE_PROJETO = 'UPDATE tb_group SET group_name = ?, unix_group_name = ?, description = ? WHERE group_id = ?';
 
     // ############################################################
     // ##........................TRACKER.........................##
     // ############################################################
-    const SELECT_TRACKER_BY_ID = "SELECT * FROM tb_tracker WHERE tracker_id = ?";
+    const SELECT_TRACKER_BY_ID = 'SELECT * FROM tb_tracker WHERE tracker_id = ?';
 
-    const INSERT_TRACKER = "INSERT INTO tb_tracker (tracker_id, group_id, name, description, item_name) VALUES (?,?,?,?,?)";
+    const INSERT_TRACKER = 'INSERT INTO tb_tracker (tracker_id, group_id, name, description, item_name) VALUES (?,?,?,?,?)';
 
-    const UPDATE_TRACKER = "UPDATE tb_tracker SET group_id = ?, name = ?, description = ?, item_name = ? WHERE tracker_id = ?";
+    const UPDATE_TRACKER = 'UPDATE tb_tracker SET group_id = ?, name = ?, description = ?, item_name = ? WHERE tracker_id = ?';
 
     // ############################################################
     // ##.......................ARTIFACT.........................##
     // ############################################################
-    const SELECT_ARTIFACT_BY_ID = "SELECT * FROM tb_artifact WHERE artifact_id = ?";
-    const SELECT_RELEASE_BY_ARTIFACT_ID = "SELECT CAST(substr(ref, 6) AS DECIMAL) AS rel FROM tb_artifact a JOIN tb_cross_references c USING (artifact_id) WHERE c.artifact_id = ? AND c.ref LIKE 'rel%'";
+    const SELECT_ARTIFACT_BY_ID = 'SELECT * FROM tb_artifact WHERE artifact_id = ?';
+    const SELECT_RELEASE_BY_ARTIFACT_ID = 'SELECT CAST(substr(ref, 6) AS DECIMAL) AS rel FROM tb_artifact a JOIN tb_cross_references c USING (artifact_id) WHERE c.artifact_id = ? AND c.ref LIKE \'rel%\'';
 
-    const INSERT_ARTIFACT = "INSERT INTO tb_artifact (artifact_id, tracker_id, group_id, submitted_by, submitted_on, last_update_date, type) VALUES (?,?,?,?,?,?,?)";
-
-    const UPDATE_ARTIFACT = "UPDATE tb_artifact SET tracker_id = ?, group_id = ?, submitted_by = ?, submitted_on = ?, last_update_date = ?, type = ? WHERE artifact_id = ?";
+    const INSERT_ARTIFACT = 'INSERT INTO tb_artifact (artifact_id, tracker_id, group_id, submitted_by, submitted_on, last_update_date, type) VALUES (?,?,?,?,?,?,?)';
+    const DELETE_ARTIFACT = 'DELETE FROM tb_artifact WHERE artifact_id = ?';
+    const UPDATE_ARTIFACT = 'UPDATE tb_artifact SET tracker_id = ?, group_id = ?, submitted_by = ?, submitted_on = ?, last_update_date = ?, type = ? WHERE artifact_id = ?';
 
     // ############################################################
     // ##.....................CROSS_REFERENCE....................##
     // ############################################################
-    const SELECT_CROSS_REFERENCE_BY_ALL = "SELECT * FROM tb_cross_references WHERE artifact_id = ? AND ref = ? AND url = ?";
+    const SELECT_CROSS_REFERENCE_BY_ALL = 'SELECT * FROM tb_cross_references WHERE artifact_id = ? AND ref = ? AND url = ?';
 
-    const DELETE_CROSS_REFERENCE = "DELETE FROM tb_cross_references WHERE artifact_id = ?";
+    const DELETE_CROSS_REFERENCE = 'DELETE FROM tb_cross_references WHERE artifact_id = ?';
 
-    const INSERT_CROSS_REFERENCE = "INSERT INTO tb_cross_references (artifact_id, ref, url) VALUES (?,?,?)";
+    const INSERT_CROSS_REFERENCE = 'INSERT INTO tb_cross_references (artifact_id, ref, url) VALUES (?,?,?)';
 
     // ############################################################
     // ##.........................FIELD..........................##
     // ############################################################
-    const SELECT_FIELD_BY_ARTIF_ID_FIELD_NAME = "SELECT * FROM tb_field WHERE artifact_id = ? AND field_name = ?";
+    const SELECT_FIELD_BY_ARTIF_ID_FIELD_NAME = 'SELECT * FROM tb_field WHERE artifact_id = ? AND field_name = ?';
 
-    const DELETE_FIELD = "DELETE FROM tb_field WHERE artifact_id = ? AND field_name = ?";
+    const DELETE_FIELD = 'DELETE FROM tb_field WHERE artifact_id = ?';
 
-    const INSERT_FIELD = "INSERT INTO tb_field (artifact_id, field_name, field_label, field_value) VALUES (?,?,?,?)";
+    const INSERT_FIELD = 'INSERT INTO tb_field (artifact_id, field_name, field_label, field_value) VALUES (?,?,?,?)';
 
-    const UPDATE_FIELD = "UPDATE tb_field SET field_value = ? WHERE field_id = ?";
+    const UPDATE_FIELD = 'UPDATE tb_field SET field_value = ? WHERE field_id = ?';
+
+    // ############################################################
+    // ##.....................CONFIGURACAO.......................##
+    // ############################################################
+    const SELECT_CONFIGURACAO_BY_GROUP_ID = 'SELECT * FROM tb_configuracao WHERE group_id = ?';
+    
+    const INSERT_REPLACE_CONFIGURACAO = 'INSERT OR REPLACE INTO tb_configuracao (group_id, unix_group_name) VALUES (?,?)';
 
     // ############################################################
     // ##.......................DASHBOARD........................##
@@ -228,7 +236,7 @@ WHERE f.artifact_id IN (
     FROM tb_artifact a
         JOIN tb_cross_references c USING (artifact_id)
     WHERE c.artifact_id = ? AND c.ref LIKE 'story%') AND
-      f.field_name IN ('como_demonstrar', 'observao', 'in_order_to_1', 'acceptance_criteria_1')
+      f.field_name IN ('como_demonstrar', 'observao', 'in_order_to_1', 'acceptance_criteria_1', 'i_want_to')
 SQL;
 
     const SELECT_STORY_BY_SPRINT = <<<SQL

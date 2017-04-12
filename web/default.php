@@ -1,6 +1,5 @@
 <?php
 require_once($_SERVER ['DOCUMENT_ROOT'] . "/template/pagina.php");
-require_once($_SERVER ['DOCUMENT_ROOT'] . "/codigo/soap/Tuleap.php");
 
 $tpl->CAMINHO_PAGINA = "";
 $tpl->NOME_PAGINA = "";
@@ -21,7 +20,7 @@ foreach ($result as $row)
 
         $tpl->GROUP_NAME = $row->group_name;
         $tpl->GROUP_ID = $row->group_id;
-            
+
         $ultimo = $row->group_name;
 
     }

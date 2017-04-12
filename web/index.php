@@ -1,6 +1,5 @@
 <?php
 require_once($_SERVER ['DOCUMENT_ROOT'] . "/codigo/portal/ConstantesPortal.php");
-require_once($_SERVER ['DOCUMENT_ROOT'] . "/codigo/util/Template.php");
 
 $tpl = new Template ($_SERVER ['DOCUMENT_ROOT'] . "/index.html", true);
 

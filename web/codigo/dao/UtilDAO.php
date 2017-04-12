@@ -1,5 +1,4 @@
 <?php
-require_once($_SERVER ['DOCUMENT_ROOT'] . "/codigo/dao/Conexao.php");
 
 class UtilDAO
 {
@@ -20,7 +19,7 @@ class UtilDAO
     {
         try
         {
-            $con = new Conexao ();
+            $con = PoolConexao::getConexao();
 
             $stm = $con->prepare($query);
 
@@ -51,34 +50,34 @@ class UtilDAO
             $con->close();
         } catch (Exception $e)
         {
-            trataErro(SqlFormatter::format(forward_static_call_array(array(
+            trataErro(SqlFormatter::format(forward_static_call_array([
                     'self',
                     'MontarQuery'
-                ), array_merge(array(
+                ], array_merge([
                     $query
-                ), $parametros))) . "<br>" . str_replace("\n", "<br>", $e));
+                ], $parametros))) . "<br>" . str_replace("\n", "<br>", $e));
         }
 
-        return ( array )$retorno;
+        return ( array ) $retorno;
     }
 
     public static function getResultArrayParam (string $query, array $parametros)
     {
         if ($parametros != null and count($parametros) > 0)
         {
-            $retorno = forward_static_call_array(array(
+            $retorno = forward_static_call_array([
                 'self',
                 'getResult'
-            ), array_merge(array(
+            ], array_merge([
                 $query
-            ), $parametros));
+            ], $parametros));
         }
         else
         {
             $retorno = self::getResult($query);
         }
 
-        return ( array )$retorno;
+        return ( array ) $retorno;
     }
 
     /**
@@ -89,7 +88,7 @@ class UtilDAO
      */
     public static function executeQuery (string $query)
     {
-        $con = new Conexao ();
+        $con = PoolConexao::getConexao();
 
         try
         {
@@ -110,7 +109,7 @@ class UtilDAO
      */
     public static function executeArrayQuery (array $query)
     {
-        $con = new Conexao ();
+        $con = PoolConexao::getConexao();
 
         $qErro = '';
         try
@@ -134,12 +133,12 @@ class UtilDAO
 
     public static function executeQueryParamArray (string $query, array $parametros)
     {
-        return forward_static_call_array(array(
+        return forward_static_call_array([
             'self',
             'executeQueryParam'
-        ), array_merge(array(
+        ], array_merge([
             $query
-        ), $parametros));
+        ], $parametros));
     }
 
     /**
@@ -151,19 +150,19 @@ class UtilDAO
      */
     public static function executeQueryParam (string $query, ...$parametros)
     {
-        $con = new Conexao ();
+        $con = PoolConexao::getConexao();
 
         try
         {
             self::executeStatement($con, $query, $parametros);
         } catch (Exception $e)
         {
-            trataErro(SqlFormatter::format(forward_static_call_array(array(
+            trataErro(SqlFormatter::format(forward_static_call_array([
                     'self',
                     'MontarQuery'
-                ), array_merge(array(
+                ], array_merge([
                     $query
-                ), $parametros))) . "<br>" . str_replace(" ", "&nbsp;", print_r($parametros, true) . "<br>") . $e, $e);
+                ], $parametros))) . "<br>" . str_replace(" ", "&nbsp;", print_r($parametros, true) . "<br>") . $e, $e);
         }
 
         $con->close();
@@ -184,7 +183,7 @@ class UtilDAO
             $query = preg_replace('/[?]/', self::ConverteParaSQL($value), $query, 1);
         }
 
-        return ( string )$query . ';';
+        return ( string ) $query . ';';
     }
 
     private static function executeStatement ($con, $query, array $parametros = [])
@@ -243,7 +242,7 @@ class UtilDAO
 
     private static function LerRetorno ($result)
     {
-        $retorno = array();
+        $retorno = [];
 
         while ($row = $result->fetchArray(SQLITE3_ASSOC))
         {
@@ -254,7 +253,7 @@ class UtilDAO
                 $linha[$index] = self::charsetDefault($item);
             }
 
-            $retorno [] = (object)$linha;
+            $retorno [] = (object) $linha;
         }
 
         return $retorno;
@@ -270,44 +269,44 @@ class UtilDAO
     {
         if (!isset ($str))
         {
-            return (string)"NULL";
+            return (string) "NULL";
         }
 
         if (gettype($str) != "string")
         {
-            return (string)$str;
+            return (string) $str;
         }
 
         // Para Nulo
         if ($str == "")
         {
-            return (string)"NULL";
+            return (string) "NULL";
         }
 
-        $str = array(
+        $str = [
             $str
-        );
+        ];
 
         // Para Numerico
         if (preg_grep(self::REGEX_GREP_NUMERICO, $str))
         {
-            return (float)floatval(str_replace(',', '.', str_replace('.', '', $str [0])));
+            return (float) floatval(str_replace(',', '.', str_replace('.', '', $str [0])));
         }
 
         // Para Datetime
         if (preg_grep(self::REGEX_GREP_DATETIME, $str))
         {
-            return (string)"'" . preg_replace(self::REGEXP_REPLACE_DATETIME, "$5-$4-$2$6", $str) [0] . "'";
+            return (string) "'" . preg_replace(self::REGEXP_REPLACE_DATETIME, "$5-$4-$2$6", $str) [0] . "'";
         }
 
         // Para Data
         if (preg_grep(self::REGEX_GREP_DATE, $str))
         {
-            return (string)"'" . preg_replace(self::REGEX_REPLACE_DATE, "$5-$4-$2", $str) [0] . "'";
+            return (string) "'" . preg_replace(self::REGEX_REPLACE_DATE, "$5-$4-$2", $str) [0] . "'";
         }
 
         // Para String
-        return (string)"'" . $str [0] . "'";
+        return (string) "'" . $str [0] . "'";
     }
 
     private static function getArgType ($arg)
@@ -331,7 +330,7 @@ class UtilDAO
 
     private static function charsetDefault ($row)
     {
-        static $enclist = array(
+        static $enclist = [
             'UTF-8',
             'ASCII',
             'ISO-8859-1',
@@ -351,7 +350,7 @@ class UtilDAO
             'Windows-1251',
             'Windows-1252',
             'Windows-1254'
-        );
+        ];
 
         if (mb_detect_encoding($row, $enclist) == 'ISO-8859-1')
         {
