@@ -41,18 +41,8 @@
 
 <!-- BEGIN PRE_BLOCK_RELEASE -->
 <div class="box-header form-group">
-    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 form-group">
-        <div class="row col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center bold thead">
-            Release do <b>{GROUP_NAME}</b>
-        </div>
-        <!-- BEGIN BLOCK_RELEASE -->
-        <div class="row col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center par_impar">
-            <a href="?group_id={GROUP_ID}&sprint={SPRINT}">{RELEASE}</a>
-        </div>
-        <!-- END BLOCK_RELEASE -->
-    </div>
-    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 form-group">
-        <div class="row text-center bold thead form-group">
+    <div class="col-xs-12 col-sm-8 form-group">
+        <div class="text-center bold thead form-group">
             Configuração
         </div>
         <form id="formulario" action="javascript:submit({ID_JSON});">
@@ -64,11 +54,34 @@
                 </div>
             </div>
             <div class="row form-group">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <label for="unix_name">Diretorio (se for necessário)</label>
+                    <div class="form-group">
+                        <span class="">
+                            https://svn.mec.gov.br/simec/simec/trunk/docs/05-Agil/
+                            <input type="text" name="diretorio" id="diretorio" value="{DIRETORIO}">
+                            /{UNIX_NAME}-release-XXXX
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="row form-group">
                 <div class="col-xs-12 col-sm-offset-3 col-sm-6 col-md-offset-4 col-md-4 col-lg-4">
                     <input class="form-control btn btn-primary btn-block" type="button" onclick="submit();" value="Salvar" id="botao_salvar">
                 </div>
             </div>
         </form>
+    </div>
+    
+    <div class="col-xs-12 col-sm-4 form-group">
+        <div class="row col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center bold thead">
+            Release do <b>{GROUP_NAME}</b>
+        </div>
+        <!-- BEGIN BLOCK_RELEASE -->
+        <div class="row col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center par_impar">
+            <a href="?group_id={GROUP_ID}&sprint={SPRINT}">{RELEASE}</a>
+        </div>
+        <!-- END BLOCK_RELEASE -->
     </div>
 </div>
 <!-- END PRE_BLOCK_RELEASE -->

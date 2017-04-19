@@ -12,7 +12,7 @@ class ConfiguracaoDAO
     {
         try
         {
-            UtilDAO::executeQueryParam(Querys::INSERT_REPLACE_CONFIGURACAO, $_POST ['group_id'],$_POST ['unix_name']);
+            UtilDAO::executeQueryParam(Querys::INSERT_REPLACE_CONFIGURACAO, $_POST ['group_id'], $_POST ['unix_name'], $_POST ['diretorio']);
 
             Ajax::RespostaSucesso('Configuração salva com sucesso.', false, Ajax::TIPO_SUCCESS);
         } catch (Exception $e)

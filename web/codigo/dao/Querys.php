@@ -99,7 +99,7 @@ SQL;
     // ############################################################
     const SELECT_PROJETO = 'SELECT group_id, unix_group_name, group_name FROM tb_group ORDER BY 3, 2';
     const SELECT_PROJETO_BY_ID = 'SELECT * FROM tb_group WHERE group_id = ?';
-    const SELECT_PROJETO_CONF_BY_ID = 'SELECT g.group_id, g.group_name, g.description, g.data_insercao, ifnull (c.unix_group_name, g.unix_group_name) unix_group_name FROM tb_group g LEFT JOIN tb_configuracao c USING (group_id) WHERE g.group_id = ?';
+    const SELECT_PROJETO_CONF_BY_ID = 'SELECT g.group_id, g.group_name, g.description, g.data_insercao, ifnull (c.unix_group_name, g.unix_group_name) unix_group_name, diretorio FROM tb_group g LEFT JOIN tb_configuracao c USING (group_id) WHERE g.group_id = ?';
     const SELECT_PROJETO_BY_ARTIFACT_ID = 'SELECT g.* FROM tb_group g JOIN tb_artifact a USING (group_id) WHERE a.artifact_id = ?';
 
     const INSERT_PROJETO = 'INSERT INTO tb_group (group_id, group_name, unix_group_name, description) VALUES (?,?,?,?)';
@@ -150,7 +150,7 @@ SQL;
     // ############################################################
     const SELECT_CONFIGURACAO_BY_GROUP_ID = 'SELECT * FROM tb_configuracao WHERE group_id = ?';
     
-    const INSERT_REPLACE_CONFIGURACAO = 'INSERT OR REPLACE INTO tb_configuracao (group_id, unix_group_name) VALUES (?,?)';
+    const INSERT_REPLACE_CONFIGURACAO = 'INSERT OR REPLACE INTO tb_configuracao (group_id, unix_group_name, diretorio) VALUES (?,?,?)';
 
     // ############################################################
     // ##.......................DASHBOARD........................##

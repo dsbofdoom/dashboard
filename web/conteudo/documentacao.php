@@ -15,7 +15,9 @@ if (isset($_REQUEST['group_id']))
 
         $release = UtilDAO::getResult(Querys::SELECT_RELEASE_BY_ARTIFACT_ID, intval($_REQUEST['sprint']))[0]->rel;
 
-        $zip = UtilDocx::montarDocumentacao($dirTmp, $projeto, $release);
+        $storys = UtilDAO::getResult(Querys::SELECT_VALUES_BY_SPRINT, intval($_REQUEST['sprint']));
+        
+        $zip = UtilDocx::montarDocumentacao($dirTmp, $projeto, $release, $storys);
 
         ignore_user_abort(true);
 
@@ -39,6 +41,7 @@ if (isset($_REQUEST['group_id']))
 
         foreach (UtilDAO::getResult(Querys::SELECT_PROJETO_CONF_BY_ID, $_REQUEST['group_id']) as $row){
             $tpl->UNIX_NAME = $row->unix_group_name;
+            $tpl->DIRETORIO = $row->diretorio;
         }
         
 
