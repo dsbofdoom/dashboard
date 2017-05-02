@@ -1,8 +1,4 @@
 <?php
-require_once($_SERVER ['DOCUMENT_ROOT'] . "/codigo/dao/Querys.php");
-require_once($_SERVER ['DOCUMENT_ROOT'] . "/codigo/dao/UtilDAO.php");
-require_once($_SERVER ['DOCUMENT_ROOT'] . "/codigo/controle/Ajax.php");
-require_once($_SERVER ['DOCUMENT_ROOT'] . "/codigo/util/Mail.php");
 
 class UsuarioDAO
 {

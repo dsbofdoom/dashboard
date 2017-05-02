@@ -1,7 +1,7 @@
 <?php
-require_once($_SERVER ['DOCUMENT_ROOT'] . "/codigo/portal/ConstantesPortal.php");
+require_once($_SERVER ['DOCUMENT_ROOT'] . "/dashboard/codigo/portal/ConstantesPortal.php");
 
-$tpl = new Template ($_SERVER ['DOCUMENT_ROOT'] . "/index.html", true);
+$tpl = new Template ($_SERVER ['DOCUMENT_ROOT'] . "/dashboard/index.html", true);
 
 if (session_status() === PHP_SESSION_NONE)
 {

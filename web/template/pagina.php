@@ -1,7 +1,7 @@
 <?php
-require_once($_SERVER ['DOCUMENT_ROOT'] . "/codigo/portal/ConstantesPortal.php");
+require_once($_SERVER ['DOCUMENT_ROOT'] . "/dashboard/codigo/portal/ConstantesPortal.php");
 
-$tpl = new Template ($_SERVER ['DOCUMENT_ROOT'] . "/template/pagina.html", true);
+$tpl = new Template ($_SERVER ['DOCUMENT_ROOT'] . "/dashboard/template/pagina.html", true);
 
 // DEBUG
 $tpl->DEBUG = Util::SendScript("var debug = " . (DEBUG ? 'true' : 'false') . ";");

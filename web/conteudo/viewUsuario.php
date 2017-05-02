@@ -1,7 +1,7 @@
 <?php
-require_once($_SERVER ['DOCUMENT_ROOT'] . "/template/pagina.php");
+require_once($_SERVER ['DOCUMENT_ROOT'] . "/dashboard/template/pagina.php");
 
-$tpl->addFile("CONTEUDO_CENTRAL", $_SERVER ['DOCUMENT_ROOT'] . "/conteudo/viewUsuario.html");
+$tpl->addFile("CONTEUDO_CENTRAL", $_SERVER ['DOCUMENT_ROOT'] . "/dashboard/conteudo/viewUsuario.html");
 
 $tpl->CHAMADA_AJAX = CHAMADA_AJAX;
 $tpl->NOME_PAGINA = "Pesquisar Usuário";

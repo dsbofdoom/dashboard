@@ -1,7 +1,7 @@
 <?php
-require_once($_SERVER ['DOCUMENT_ROOT'] . "/template/pagina.php");
+require_once($_SERVER ['DOCUMENT_ROOT'] . "/dashboard/template/pagina.php");
 
-$tpl->addFile("CONTEUDO_CENTRAL", $_SERVER ['DOCUMENT_ROOT'] . "/conteudo/addUsuario.html");
+$tpl->addFile("CONTEUDO_CENTRAL", $_SERVER ['DOCUMENT_ROOT'] . "/dashboard/conteudo/addUsuario.html");
 
 $tpl->NOME_PAGINA = "Cadastrar Usuário";
 $tpl->DESCRICAO_PAGINA = "";

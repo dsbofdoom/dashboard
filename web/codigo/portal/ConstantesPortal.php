@@ -15,13 +15,13 @@ const EMPRESA_SISTEMA = "Cast Group Inc.";
 const ANO_SISTEMA = "2017";
 const FAV_ICON = "";
 define('DIRETORIO_RAIZ', "http://{$_SERVER['HTTP_HOST']}");
-const CHAMADA_AJAX = "/codigo/controle/JSON.php";
-const DIRETORIO_CONTEUDO = "/conteudo";
-const PAGINA_PRINCIPAL = "/default.php";
-define("DIRETORIO_IMPORT", $_SERVER ['DOCUMENT_ROOT']);
+const CHAMADA_AJAX = "/dashboard/codigo/controle/JSON.php";
+const DIRETORIO_CONTEUDO = "/dashboard/conteudo";
+const PAGINA_PRINCIPAL = "/dashboard/default.php";
+define("DIRETORIO_IMPORT", $_SERVER ['DOCUMENT_ROOT'] . '/dashboard/');
 
 // Configuracoes de Banco
-define("BANCO_URL", $_SERVER ['DOCUMENT_ROOT'] . "/db\\banco.db");
+define("BANCO_URL", $_SERVER ['DOCUMENT_ROOT'] . "/dashboard/db/banco.db");
 
 // Configuracao de Perfil
 const PERFIL_0_ADMIN = "0";
@@ -29,9 +29,9 @@ const PERFIL_1_ESCRITA = "1";
 const PERFIL_2_CONSULTA = "2";
 
 // Constantes dos arquivos de template 
-define('TEMPLATE_ROTEIRO', "{$_SERVER ['DOCUMENT_ROOT']}/arquivos/roteiro");
-define('TEMPLATE_TERMO_ENTREGA', "{$_SERVER ['DOCUMENT_ROOT']}/arquivos/termo");
-define('TEMPLATE_HISTORIA', "{$_SERVER ['DOCUMENT_ROOT']}/arquivos/AnaliseFuncionalidades");
+define('TEMPLATE_ROTEIRO', "{$_SERVER ['DOCUMENT_ROOT']}/dashboard/arquivos/roteiro");
+define('TEMPLATE_TERMO_ENTREGA', "{$_SERVER ['DOCUMENT_ROOT']}/dashboard/arquivos/termo");
+define('TEMPLATE_HISTORIA', "{$_SERVER ['DOCUMENT_ROOT']}/dashboard/arquivos/AnaliseFuncionalidades");
 
 spl_autoload_register("my_autoload", true, true);
 
@@ -84,7 +84,7 @@ function generateCallTrace ($e)
 
 function my_autoload ($className)
 {
-    carregaClasseRecursiva($_SERVER ['DOCUMENT_ROOT'] . '/codigo/', strtolower("$className.php"));
+    carregaClasseRecursiva($_SERVER ['DOCUMENT_ROOT'] . '/dashboard/codigo/', strtolower("$className.php"));
 }
 
 function carregaClasseRecursiva ($directory, $classe)
