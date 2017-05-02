@@ -1,5 +1,5 @@
 <?php
-require_once($_SERVER ['DOCUMENT_ROOT'] . '/codigo/portal/ConstantesPortal.php');
+require_once($_SERVER ['DOCUMENT_ROOT'] . '/dashboard/codigo/portal/ConstantesPortal.php');
 
 $Comando = $_POST ['comando'];
 switch ($Comando)

@@ -1,5 +1,5 @@
 <?php
-require_once("{$_SERVER ['DOCUMENT_ROOT']}/template/pagina.php");
+require_once("{$_SERVER ['DOCUMENT_ROOT']}/dashboard/template/pagina.php");
 
 $tpl->addFile('DESCRICAO_PAGINA', 'documentacao.html');
 
