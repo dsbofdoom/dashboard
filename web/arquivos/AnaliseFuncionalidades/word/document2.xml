@@ -80,8 +80,7 @@
                 <w:rPr>
                     <w:lang w:val="pt-BR" w:eastAsia="en-US"/>
                 </w:rPr>
-                <w:t>Registrar as funcionalidades identificadas em uma história, com foco nas necessidades do usuário (foco negocial), para fins de contagem de pontos de função.
-                </w:t>
+                <w:t>Registrar as funcionalidades identificadas em uma história, com foco nas necessidades do usuário (foco negocial), para fins de contagem de pontos de função.</w:t>
             </w:r>
         </w:p>
         <w:p w:rsidR="003948D1" w:rsidRPr="004E74F4" w:rsidRDefault="000A50E8">
@@ -196,7 +195,7 @@
                 </w:r>
             </w:hyperlink>
         </w:p>
-        <w:p w:rsidR="00B55D36" w:rsidRPr="004E74F4" w:rsidRDefault="007D3796">
+        <w:p w:rsidR="00B55D36" w:rsidRPr="004E74F4" w:rsidRDefault="00A82431">
             <w:pPr>
                 <w:pStyle w:val="Sumrio1"/>
                 <w:tabs>
@@ -284,7 +283,7 @@
                 </w:r>
             </w:hyperlink>
         </w:p>
-        <w:p w:rsidR="00B55D36" w:rsidRPr="004E74F4" w:rsidRDefault="007D3796">
+        <w:p w:rsidR="00B55D36" w:rsidRPr="004E74F4" w:rsidRDefault="00A82431">
             <w:pPr>
                 <w:pStyle w:val="Sumrio2"/>
                 <w:tabs>
@@ -374,7 +373,7 @@
                 </w:r>
             </w:hyperlink>
         </w:p>
-        <w:p w:rsidR="00B55D36" w:rsidRPr="004E74F4" w:rsidRDefault="007D3796">
+        <w:p w:rsidR="00B55D36" w:rsidRPr="004E74F4" w:rsidRDefault="00A82431">
             <w:pPr>
                 <w:pStyle w:val="Sumrio3"/>
                 <w:tabs>
@@ -462,7 +461,7 @@
                 </w:r>
             </w:hyperlink>
         </w:p>
-        <w:p w:rsidR="00B55D36" w:rsidRPr="004E74F4" w:rsidRDefault="007D3796">
+        <w:p w:rsidR="00B55D36" w:rsidRPr="004E74F4" w:rsidRDefault="00A82431">
             <w:pPr>
                 <w:pStyle w:val="Sumrio3"/>
                 <w:tabs>
@@ -550,7 +549,7 @@
                 </w:r>
             </w:hyperlink>
         </w:p>
-        <w:p w:rsidR="00B55D36" w:rsidRPr="004E74F4" w:rsidRDefault="007D3796">
+        <w:p w:rsidR="00B55D36" w:rsidRPr="004E74F4" w:rsidRDefault="00A82431">
             <w:pPr>
                 <w:pStyle w:val="Sumrio3"/>
                 <w:tabs>
@@ -638,7 +637,7 @@
                 </w:r>
             </w:hyperlink>
         </w:p>
-        <w:p w:rsidR="00B55D36" w:rsidRPr="004E74F4" w:rsidRDefault="007D3796">
+        <w:p w:rsidR="00B55D36" w:rsidRPr="004E74F4" w:rsidRDefault="00A82431">
             <w:pPr>
                 <w:pStyle w:val="Sumrio1"/>
                 <w:tabs>
@@ -940,14 +939,12 @@
                 </w:rPr>
                 <w:t xml:space="preserve"> </w:t>
             </w:r>
-            <w:bookmarkStart w:id="3" w:name="_GoBack"/>
             <w:r w:rsidR="00500913">
                 <w:rPr>
                     <w:lang w:val="pt-BR" w:eastAsia="en-US"/>
                 </w:rPr>
                 <w:t>##_FUNCIONALIDADE_##</w:t>
             </w:r>
-            <w:bookmarkEnd w:id="3"/>
         </w:p>
         <w:p w:rsidR="003948D1" w:rsidRPr="004E74F4" w:rsidRDefault="000A50E8">
             <w:pPr>
@@ -1357,8 +1354,8 @@
                                 <w:sz w:val="20"/>
                             </w:rPr>
                         </w:pPr>
-                        <w:bookmarkStart w:id="4" w:name="__DdeLink__706_1669697669"/>
-                        <w:bookmarkEnd w:id="4"/>
+                        <w:bookmarkStart w:id="3" w:name="__DdeLink__706_1669697669"/>
+                        <w:bookmarkEnd w:id="3"/>
                     </w:p>
                 </w:tc>
             </w:tr>
@@ -1594,16 +1591,13 @@
                 <w:rPr>
                     <w:lang w:val="pt-BR"/>
                 </w:rPr>
-                <w:lastRenderedPageBreak/>
                 <w:t>Interface do Usuário (telas)</w:t>
             </w:r>
             <w:bookmarkEnd w:id="4"/>
         </w:p>
-        <w:p w:rsidR="001A107F" w:rsidRPr="00A22101" w:rsidRDefault="00A22101" w:rsidP="00A22101">
+        <w:p w:rsidR="001A107F" w:rsidRPr="00A22101" w:rsidRDefault="00A82431" w:rsidP="000F59E4">
             <w:pPr>
-                <w:spacing w:before="100" w:beforeAutospacing="1" w:after="100" w:afterAutospacing="1"/>
-                <w:ind w:left="360"/>
-                <w:jc w:val="left"/>
+                <w:jc w:val="center"/>
                 <w:rPr>
                     <w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/>
                     <w:color w:val="333333"/>
@@ -1649,6 +1643,7 @@
                 <w:rPr>
                     <w:lang w:val="pt-BR"/>
                 </w:rPr>
+                <w:lastRenderedPageBreak/>
                 <w:t>Modificações realizadas</w:t>
             </w:r>
             <w:bookmarkEnd w:id="6"/>

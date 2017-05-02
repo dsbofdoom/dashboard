@@ -44,7 +44,7 @@
                 <w:rPr>
                     <w:sz w:val="28"/>
                 </w:rPr>
-                <w:t>8645</w:t>
+                <w:t>7674</w:t>
             </w:r>
         </w:p>
         <w:p w:rsidR="003948D1" w:rsidRPr="004E74F4" w:rsidRDefault="000A50E8">
@@ -80,8 +80,7 @@
                 <w:rPr>
                     <w:lang w:val="pt-BR" w:eastAsia="en-US"/>
                 </w:rPr>
-                <w:t>Registrar as funcionalidades identificadas em uma história, com foco nas necessidades do usuário (foco negocial), para fins de contagem de pontos de função.
-                </w:t>
+                <w:t>Registrar as funcionalidades identificadas em uma história, com foco nas necessidades do usuário (foco negocial), para fins de contagem de pontos de função.</w:t>
             </w:r>
         </w:p>
         <w:p w:rsidR="003948D1" w:rsidRPr="004E74F4" w:rsidRDefault="000A50E8">
@@ -196,7 +195,7 @@
                 </w:r>
             </w:hyperlink>
         </w:p>
-        <w:p w:rsidR="00B55D36" w:rsidRPr="004E74F4" w:rsidRDefault="007D3796">
+        <w:p w:rsidR="00B55D36" w:rsidRPr="004E74F4" w:rsidRDefault="00A82431">
             <w:pPr>
                 <w:pStyle w:val="Sumrio1"/>
                 <w:tabs>
@@ -284,7 +283,7 @@
                 </w:r>
             </w:hyperlink>
         </w:p>
-        <w:p w:rsidR="00B55D36" w:rsidRPr="004E74F4" w:rsidRDefault="007D3796">
+        <w:p w:rsidR="00B55D36" w:rsidRPr="004E74F4" w:rsidRDefault="00A82431">
             <w:pPr>
                 <w:pStyle w:val="Sumrio2"/>
                 <w:tabs>
@@ -374,7 +373,7 @@
                 </w:r>
             </w:hyperlink>
         </w:p>
-        <w:p w:rsidR="00B55D36" w:rsidRPr="004E74F4" w:rsidRDefault="007D3796">
+        <w:p w:rsidR="00B55D36" w:rsidRPr="004E74F4" w:rsidRDefault="00A82431">
             <w:pPr>
                 <w:pStyle w:val="Sumrio3"/>
                 <w:tabs>
@@ -462,7 +461,7 @@
                 </w:r>
             </w:hyperlink>
         </w:p>
-        <w:p w:rsidR="00B55D36" w:rsidRPr="004E74F4" w:rsidRDefault="007D3796">
+        <w:p w:rsidR="00B55D36" w:rsidRPr="004E74F4" w:rsidRDefault="00A82431">
             <w:pPr>
                 <w:pStyle w:val="Sumrio3"/>
                 <w:tabs>
@@ -550,7 +549,7 @@
                 </w:r>
             </w:hyperlink>
         </w:p>
-        <w:p w:rsidR="00B55D36" w:rsidRPr="004E74F4" w:rsidRDefault="007D3796">
+        <w:p w:rsidR="00B55D36" w:rsidRPr="004E74F4" w:rsidRDefault="00A82431">
             <w:pPr>
                 <w:pStyle w:val="Sumrio3"/>
                 <w:tabs>
@@ -638,7 +637,7 @@
                 </w:r>
             </w:hyperlink>
         </w:p>
-        <w:p w:rsidR="00B55D36" w:rsidRPr="004E74F4" w:rsidRDefault="007D3796">
+        <w:p w:rsidR="00B55D36" w:rsidRPr="004E74F4" w:rsidRDefault="00A82431">
             <w:pPr>
                 <w:pStyle w:val="Sumrio1"/>
                 <w:tabs>
@@ -900,7 +899,7 @@
                                 <w:color w:val="00000A"/>
                                 <w:lang w:eastAsia="en-US"/>
                             </w:rPr>
-                            <w:t>https://svn.mec.gov.br/simec/simec/trunk/docs/01-Especificacao/Banco de dados/Modelo de dados/mer_projovemurbano2/</w:t>
+                            <w:t>https://svn.mec.gov.br/simec/simec/trunk/docs/01-Especificacao/Banco de dados/Modelo de dados/mer_projovemcampo2/</w:t>
                         </w:r>
                     </w:p>
                 </w:tc>
@@ -940,14 +939,12 @@
                 </w:rPr>
                 <w:t xml:space="preserve"> </w:t>
             </w:r>
-            <w:bookmarkStart w:id="3" w:name="_GoBack"/>
             <w:r w:rsidR="00500913">
                 <w:rPr>
                     <w:lang w:val="pt-BR" w:eastAsia="en-US"/>
                 </w:rPr>
-                <w:t>Aprovar uma solicitação de polo</w:t>
+                <w:t>Apresentar o resumo de cadastro de identificação e adesão estadual e municipal</w:t>
             </w:r>
-            <w:bookmarkEnd w:id="3"/>
         </w:p>
         <w:p w:rsidR="003948D1" w:rsidRPr="004E74F4" w:rsidRDefault="000A50E8">
             <w:pPr>
@@ -1357,8 +1354,8 @@
                                 <w:sz w:val="20"/>
                             </w:rPr>
                         </w:pPr>
-                        <w:bookmarkStart w:id="4" w:name="__DdeLink__706_1669697669"/>
-                        <w:bookmarkEnd w:id="4"/>
+                        <w:bookmarkStart w:id="3" w:name="__DdeLink__706_1669697669"/>
+                        <w:bookmarkEnd w:id="3"/>
                     </w:p>
                 </w:tc>
             </w:tr>
@@ -1594,16 +1591,13 @@
                 <w:rPr>
                     <w:lang w:val="pt-BR"/>
                 </w:rPr>
-                <w:lastRenderedPageBreak/>
                 <w:t>Interface do Usuário (telas)</w:t>
             </w:r>
             <w:bookmarkEnd w:id="4"/>
         </w:p>
-        <w:p w:rsidR="001A107F" w:rsidRPr="00A22101" w:rsidRDefault="00A22101" w:rsidP="00A22101">
+        <w:p w:rsidR="001A107F" w:rsidRPr="00A22101" w:rsidRDefault="00A82431" w:rsidP="000F59E4">
             <w:pPr>
-                <w:spacing w:before="100" w:beforeAutospacing="1" w:after="100" w:afterAutospacing="1"/>
-                <w:ind w:left="360"/>
-                <w:jc w:val="left"/>
+                <w:jc w:val="center"/>
                 <w:rPr>
                     <w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/>
                     <w:color w:val="333333"/>
@@ -1649,11 +1643,12 @@
                 <w:rPr>
                     <w:lang w:val="pt-BR"/>
                 </w:rPr>
+                <w:lastRenderedPageBreak/>
                 <w:t>Modificações realizadas</w:t>
             </w:r>
             <w:bookmarkEnd w:id="6"/>
         </w:p>
-        <w:p><w:pPr><w:rPr><w:lang w:eastAsia="en-US"/></w:rPr></w:pPr><w:r><w:rPr><w:lang w:eastAsia="en-US"/></w:rPr><w:t>Projovem Urbano 2 > Página inicial</w:t></w:r></w:p> <w:p><w:pPr><w:rPr><w:lang w:eastAsia="en-US"/></w:rPr></w:pPr><w:r><w:rPr><w:lang w:eastAsia="en-US"/></w:rPr><w:t>- Criar a funcionalidade de aprovação e rejeição de solicitação de criação de polo.</w:t></w:r></w:p><w:p><w:pPr><w:rPr><w:lang w:eastAsia="en-US"/></w:rPr></w:pPr><w:r><w:rPr><w:lang w:eastAsia="en-US"/></w:rPr><w:t>1 - Apresentar na tela inicial as solicitações de criação de polo para o município.</w:t></w:r></w:p><w:p><w:pPr><w:rPr><w:lang w:eastAsia="en-US"/></w:rPr></w:pPr><w:r><w:rPr><w:lang w:eastAsia="en-US"/></w:rPr><w:t>Colunas: UF, Município, Nome do polo, Endereço.</w:t></w:r></w:p><w:p><w:pPr><w:rPr><w:lang w:eastAsia="en-US"/></w:rPr></w:pPr><w:r><w:rPr><w:lang w:eastAsia="en-US"/></w:rPr><w:t>Ações:</w:t></w:r></w:p><w:p><w:pPr><w:rPr><w:lang w:eastAsia="en-US"/></w:rPr></w:pPr><w:r><w:rPr><w:lang w:eastAsia="en-US"/></w:rPr><w:t> Aprovar: Quando acionado deve liberar o polo para o município, e ser apresentado no cadastro de polo e núcleo do município correspondente.</w:t></w:r></w:p><w:p><w:pPr><w:rPr><w:lang w:eastAsia="en-US"/></w:rPr></w:pPr><w:r><w:rPr><w:lang w:eastAsia="en-US"/></w:rPr><w:t> Recusar: Quando acionado deve alterar a situação do polo para "Rejeitado" e ser apresentado no cadastro de polo e núcleo do município correspondente como rejeitado.</w:t></w:r></w:p><w:p><w:pPr><w:rPr><w:lang w:eastAsia="en-US"/></w:rPr></w:pPr><w:r><w:rPr><w:lang w:eastAsia="en-US"/></w:rPr><w:t>RC - Após a liberação ou rejeição de um polo, este deve sair da listagem de solicitações de criação de polo.</w:t></w:r></w:p><w:p><w:pPr><w:rPr><w:lang w:eastAsia="en-US"/></w:rPr></w:pPr><w:r><w:rPr><w:lang w:eastAsia="en-US"/></w:rPr><w:t></w:t></w:r></w:p>
+        <w:p><w:pPr><w:rPr><w:lang w:eastAsia="en-US"/></w:rPr></w:pPr><w:r><w:rPr><w:lang w:eastAsia="en-US"/></w:rPr><w:t>Projovem Campo2</w:t></w:r></w:p> <w:p><w:pPr><w:rPr><w:lang w:eastAsia="en-US"/></w:rPr></w:pPr><w:r><w:rPr><w:lang w:eastAsia="en-US"/></w:rPr><w:t>1 - Criar a funcionalidade para apresentar o resumo de cadastro de identificação e adesão estadual e municipal.</w:t></w:r></w:p><w:p><w:pPr><w:rPr><w:lang w:eastAsia="en-US"/></w:rPr></w:pPr><w:r><w:rPr><w:lang w:eastAsia="en-US"/></w:rPr><w:t>2 - Apresentar o ano de execução do projeto. Campo de seleção única.</w:t></w:r></w:p><w:p><w:pPr><w:rPr><w:lang w:eastAsia="en-US"/></w:rPr></w:pPr><w:r><w:rPr><w:lang w:eastAsia="en-US"/></w:rPr><w:t>3 - Apresentar botões de acesso à identificação, configuração da adesão estadual e configuração da adesão municipal.</w:t></w:r></w:p><w:p><w:pPr><w:rPr><w:lang w:eastAsia="en-US"/></w:rPr></w:pPr><w:r><w:rPr><w:lang w:eastAsia="en-US"/></w:rPr><w:t>4 - Apresentar as tabelas de resumo da adesão estadual pelo secretário e adesão municipal pelo secretário.</w:t></w:r></w:p><w:p><w:pPr><w:rPr><w:lang w:eastAsia="en-US"/></w:rPr></w:pPr><w:r><w:rPr><w:lang w:eastAsia="en-US"/></w:rPr><w:t>ADESÃO ESTADUAL</w:t></w:r></w:p><w:p><w:pPr><w:rPr><w:lang w:eastAsia="en-US"/></w:rPr></w:pPr><w:r><w:rPr><w:lang w:eastAsia="en-US"/></w:rPr><w:t> Estado: Apresenta o estado da adesão estadual.</w:t></w:r></w:p><w:p><w:pPr><w:rPr><w:lang w:eastAsia="en-US"/></w:rPr></w:pPr><w:r><w:rPr><w:lang w:eastAsia="en-US"/></w:rPr><w:t> Cadastro da identificação e metas: Apresenta o período de cadastro da identificação do secretário e secretaria e a definição de metas por público.</w:t></w:r></w:p><w:p><w:pPr><w:rPr><w:lang w:eastAsia="en-US"/></w:rPr></w:pPr><w:r><w:rPr><w:lang w:eastAsia="en-US"/></w:rPr><w:t> Meta total: Apresenta a meta total do estado.</w:t></w:r></w:p><w:p><w:pPr><w:rPr><w:lang w:eastAsia="en-US"/></w:rPr></w:pPr><w:r><w:rPr><w:lang w:eastAsia="en-US"/></w:rPr><w:t> Adesão: Apresenta se o secretário realizou ou não a adesão, opções: SIM e NÃO.</w:t></w:r></w:p><w:p><w:pPr><w:rPr><w:lang w:eastAsia="en-US"/></w:rPr></w:pPr><w:r><w:rPr><w:lang w:eastAsia="en-US"/></w:rPr><w:t>RN - Quando o secretário realizar a adesão de um estado ou município, a linha correspondente deve ser evidenciada com cor de fundo verde.</w:t></w:r></w:p><w:p><w:pPr><w:rPr><w:lang w:eastAsia="en-US"/></w:rPr></w:pPr><w:r><w:rPr><w:lang w:eastAsia="en-US"/></w:rPr><w:t> </w:t></w:r></w:p><w:p><w:pPr><w:rPr><w:lang w:eastAsia="en-US"/></w:rPr></w:pPr><w:r><w:rPr><w:lang w:eastAsia="en-US"/></w:rPr><w:t>ADESÃO MUNICIPAL</w:t></w:r></w:p><w:p><w:pPr><w:rPr><w:lang w:eastAsia="en-US"/></w:rPr></w:pPr><w:r><w:rPr><w:lang w:eastAsia="en-US"/></w:rPr><w:t> Estado: Apresenta o município da adesão municipal.</w:t></w:r></w:p><w:p><w:pPr><w:rPr><w:lang w:eastAsia="en-US"/></w:rPr></w:pPr><w:r><w:rPr><w:lang w:eastAsia="en-US"/></w:rPr><w:t> Cadastro da identificação e metas: Apresenta o período de cadastro da identificação do secretário e secretaria e a definição de metas por público.</w:t></w:r></w:p><w:p><w:pPr><w:rPr><w:lang w:eastAsia="en-US"/></w:rPr></w:pPr><w:r><w:rPr><w:lang w:eastAsia="en-US"/></w:rPr><w:t> Meta total: Apresenta a meta total do município.</w:t></w:r></w:p><w:p><w:pPr><w:rPr><w:lang w:eastAsia="en-US"/></w:rPr></w:pPr><w:r><w:rPr><w:lang w:eastAsia="en-US"/></w:rPr><w:t> Adesão: Apresenta se o secretário realizou ou não a adesão, opções: SIM e NÃO.</w:t></w:r></w:p><w:p><w:pPr><w:rPr><w:lang w:eastAsia="en-US"/></w:rPr></w:pPr><w:r><w:rPr><w:lang w:eastAsia="en-US"/></w:rPr><w:t>RN - Quando o secretário realizar a adesão de um estado ou município, a linha correspondente deve ser evidenciada com cor de fundo verde.</w:t></w:r></w:p><w:p><w:pPr><w:rPr><w:lang w:eastAsia="en-US"/></w:rPr></w:pPr><w:r><w:rPr><w:lang w:eastAsia="en-US"/></w:rPr><w:t> </w:t></w:r></w:p><w:p><w:pPr><w:rPr><w:lang w:eastAsia="en-US"/></w:rPr></w:pPr><w:r><w:rPr><w:lang w:eastAsia="en-US"/></w:rPr><w:t>AÇÕES</w:t></w:r></w:p><w:p><w:pPr><w:rPr><w:lang w:eastAsia="en-US"/></w:rPr></w:pPr><w:r><w:rPr><w:lang w:eastAsia="en-US"/></w:rPr><w:t> Visualizar: Quando acionado deve direcionar para a tela de instruções da adesão do secretário. stroy #7314</w:t></w:r></w:p><w:p><w:pPr><w:rPr><w:lang w:eastAsia="en-US"/></w:rPr></w:pPr><w:r><w:rPr><w:lang w:eastAsia="en-US"/></w:rPr><w:t> </w:t></w:r></w:p><w:p><w:pPr><w:rPr><w:lang w:eastAsia="en-US"/></w:rPr></w:pPr><w:r><w:rPr><w:lang w:eastAsia="en-US"/></w:rPr><w:t>5 - Permitir realizar o download da tabela de adesão estadual ou municipal no formato xls.</w:t></w:r></w:p><w:p><w:pPr><w:rPr><w:lang w:eastAsia="en-US"/></w:rPr></w:pPr><w:r><w:rPr><w:lang w:eastAsia="en-US"/></w:rPr><w:t></w:t></w:r></w:p>
         <w:p w:rsidR="003948D1" w:rsidRPr="004E74F4" w:rsidRDefault="000A50E8" w:rsidP="00AC44C4">
             <w:pPr>
                 <w:pStyle w:val="Ttulo1"/>
