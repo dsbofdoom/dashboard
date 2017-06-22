@@ -1,0 +1,78 @@
+<script type="text/javascript">
+    function submit(comando) {
+        var falha = false, inputs = $(event.target).closest("form").find("[required]");
+        $("label").css("color", "");
+        for (var i = 0; i < inputs.length; i++) {
+            var input = $(inputs[i]);
+
+            if (!input.val() || input.val() == "") {
+                var label = $("label[for='" + input.prop("id") + "']").css("color", "red");
+                if (!falha)
+                    input.focus();
+                falha = true;
+            }
+        }
+
+        if (falha) {
+            $.notify("Favor preencher os campos obrigatórios (em vermelho).", "error");
+            return;
+        }
+
+        ajax("{CHAMADA_AJAX}", $(event.target).closest("form").serialize() + "&comando=" + comando, '', function () {
+            setTimeout(function () {
+                window.location = "{PAGINA_RETORNO}";
+            }, 1000)
+        });
+    }
+    function desativar(comando) {
+        ajax("{CHAMADA_AJAX}", $(event.target).closest("form").serialize() + "&comando=" + comando, '', function () {
+            setTimeout(function () {
+                window.location = "{PAGINA_RETORNO}";
+            }, 1000);
+        });
+    }
+</script>
+<form id="formulario" action="javascript:submit({ID_JSON});">
+    <div class="box-header with-border">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 form-group">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 form-group bold text-primary subtitulo">Usuário</div>
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 form-group">
+                <label for="nome">Nome</label>
+                <input id="nome" name="nome" type="text" class="form-control" value="{VALUE_NOME}" required>
+                <input id="id_usuario" name="id_usuario" type="hidden" value="{VALUE_ID_USUARIO}">
+            </div>
+            <div class="col-xs-12 col-md-6 form-group">
+                <label for="tuleap_user">Usuário</label> <input id="tuleap_user" name="tuleap_user"
+                                                                type="text" class="form-control" value="{VALUE_TULEAP_USER}">
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-6 form-group">
+                <label for="email">E-mail</label>
+                <input id="email" name="email" type="text" placeholder="abc@abc.com..." required class="form-control" value="{VALUE_EMAIL}">
+            </div>
+            <!-- BEGIN BLOCK_PERFIL -->
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 form-group">
+                <label for="perfil">Perfil</label>
+                {SCRIPT_PERFIL}
+                <select id="perfil" name="perfil" required class="form-control">
+                    <option value="" disabled selected></option>
+                    <option value="0">Administrador</option>
+                    <option value="1">Escrita</option>
+                    <option value="2">Consulta</option>
+                </select>
+            </div>
+            <!-- END BLOCK_PERFIL -->
+            <!-- BEGIN BLOCK_ATIVO -->
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 form-group">
+                <label for="botao_desativar">Usuário se encontra: {VALUE_ATIVO_EXTENSO}</label>
+                <input class="form-control btn {CLASS_ATIVO}" type="button" onclick="desativar(948723);" value="{BTN_ATIVO} este usuário" id="botao_desativar">
+                <input type="hidden" id="ativo" name="ativo" value="{VALUE_ATIVO}">
+            </div>
+            <!-- END BLOCK_ATIVO -->
+        </div>
+    </div>
+    <div class="box-header">
+        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+            <input class="form-control btn btn-primary" type="button" onclick="submit();" value="Salvar" id="botao_salvar">
+        </div>
+    </div>
+</form>

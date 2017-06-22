@@ -1,0 +1,294 @@
+<script>
+    $(document).ready(function () {
+        $('[data-toggle="popover"]').popover({
+            container: 'body'
+        });
+    });
+
+    function abrirModalArtifact(campo) {
+        $('.modal-body', '#artifactModal').html($(campo).attr('data-content'));
+        $('.modal-title', '#artifactModal').html($(campo).html().toUpperCase());
+
+        $('#artifactModal').modal('show');
+    }
+</script>
+<div class="col-xs-12 form-group">
+    <div class="col-xs-12 form-group text-primary subtitulo">{SIGLA}</div>
+
+    <div class="row col-xs-12 form-group">{DESCRIPTION}</div>
+</div>
+
+<div class="col-xs-12">
+    <button class="btn btn-info" style="position: absolute;z-index: 1000;" id="zoom_gantt" onclick="toggleMode(this)"><i class="fa fa-search"></i> Zoom to Fit
+    </button>
+    <div id="gantt_here" style='width:100%; height:0px;' class="form-group"></div>
+</div>
+<script type="text/javascript">
+    $().ready(function () {
+        ajax("{CHAMADA_AJAX}", {comando: 1089148, group_id: '{GROUP_ID}'}, function (dados) {
+            if (dados && dados['data'] && dados['data'].length > 0) {
+                $("#gantt_here").css('height', (54 + 35 * dados['data'].length) + 'px');
+
+
+                gantt.config.columns = [
+                    {name: "text", label: "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tarefa", width: "*", tree: false},
+                    {name: "duration", label: "Duração (24h/7d)", align: "center", width: 110}
+                ];
+
+                gantt.config.grid_width = 350;
+                gantt.config.date_scale = gantt.config.date_grid = "%d/%m";
+                gantt.config.task_date = '';
+                gantt.config.readonly = true;
+
+                gantt.templates.task_class = function (start, end, task) {
+                    return task.template;
+                };
+
+                gantt.init("gantt_here");
+                gantt.parse(dados);
+
+
+                $("#zoom_gantt").click();
+            } else {
+                $("#zoom_gantt").remove();
+            }
+        });
+    });
+
+    function toggleMode(toggle) {
+        toggle.enabled = !toggle.enabled;
+        if (toggle.enabled) {
+            toggle.innerHTML = "<i class='fa fa-search'></i> Zoom 1:1";
+            //Saving previous scale state for future restore
+            saveConfig();
+            zoomToFit();
+        } else {
+
+            toggle.innerHTML = "<i class='fa fa-search'></i> Zoom to Fit";
+            //Restore previous scale state
+            restoreConfig();
+            gantt.render();
+        }
+    }
+
+    var cachedSettings = {};
+    function saveConfig() {
+        var config = gantt.config;
+        cachedSettings = {};
+        cachedSettings.scale_unit = config.scale_unit;
+        cachedSettings.date_scale = config.date_scale;
+        cachedSettings.step = config.step;
+        cachedSettings.subscales = config.subscales;
+        cachedSettings.template = gantt.templates.date_scale;
+        cachedSettings.start_date = config.start_date;
+        cachedSettings.end_date = config.end_date;
+    }
+    function restoreConfig() {
+        applyConfig(cachedSettings);
+    }
+
+    function applyConfig(config, dates) {
+        gantt.config.scale_unit = config.scale_unit;
+        if (config.date_scale) {
+            gantt.config.date_scale = config.date_scale;
+            gantt.templates.date_scale = null;
+        }
+        else {
+            gantt.templates.date_scale = config.template;
+        }
+
+        gantt.config.step = config.step;
+        gantt.config.subscales = config.subscales;
+
+        if (dates) {
+            gantt.config.start_date = gantt.date.add(dates.start_date, -1, config.unit);
+            gantt.config.end_date = gantt.date.add(gantt.date[config.unit + "_start"](dates.end_date), 2, config.unit);
+        } else {
+            gantt.config.start_date = gantt.config.end_date = null;
+        }
+    }
+
+
+    function zoomToFit() {
+        var project = gantt.getSubtaskDates(),
+            areaWidth = gantt.$task.offsetWidth;
+
+        for (var i = 0; i < scaleConfigs.length; i++) {
+            var columnCount = getUnitsBetween(project.start_date, project.end_date, scaleConfigs[i].unit, scaleConfigs[i].step);
+            if ((columnCount + 2) * gantt.config.min_column_width <= areaWidth) {
+                break;
+            }
+        }
+
+        if (i == scaleConfigs.length) {
+            i--;
+        }
+
+        applyConfig(scaleConfigs[i], project);
+        gantt.render();
+    }
+
+    // get number of columns in timeline
+    function getUnitsBetween(from, to, unit, step) {
+        var start = new Date(from),
+            end = new Date(to);
+        var units = 0;
+        while (start.valueOf() < end.valueOf()) {
+            units++;
+            start = gantt.date.add(start, step, unit);
+        }
+        return units;
+    }
+
+    //Setting available scales
+    var scaleConfigs = [
+        // minutes
+        {
+            unit: "minute", step: 1, scale_unit: "hour", date_scale: "%H", subscales: [
+            {unit: "minute", step: 1, date: "%H:%i"}
+        ]
+        },
+        // hours
+        {
+            unit: "hour", step: 1, scale_unit: "day", date_scale: "%j %M",
+            subscales: [
+                {unit: "hour", step: 1, date: "%H:%i"}
+            ]
+        },
+        // days
+        {
+            unit: "day", step: 1, scale_unit: "month", date_scale: "%F",
+            subscales: [
+                {unit: "day", step: 1, date: "%j"}
+            ]
+        },
+        // weeks
+        {
+            unit: "week", step: 1, scale_unit: "month", date_scale: "%F",
+            subscales: [
+                {
+                    unit: "week", step: 1, template: function (date) {
+                    var dateToStr = gantt.date.date_to_str("%d %M");
+                    var endDate = gantt.date.add(gantt.date.add(date, 1, "week"), -1, "day");
+                    return dateToStr(date) + " - " + dateToStr(endDate);
+                }
+                }
+            ]
+        },
+        // months
+        {
+            unit: "month", step: 1, scale_unit: "year", date_scale: "%Y",
+            subscales: [
+                {unit: "month", step: 1, date: "%M"}
+            ]
+        },
+        // quarters
+        {
+            unit: "month", step: 3, scale_unit: "year", date_scale: "%Y",
+            subscales: [
+                {
+                    unit: "month", step: 3, template: function (date) {
+                    var dateToStr = gantt.date.date_to_str("%M");
+                    var endDate = gantt.date.add(gantt.date.add(date, 3, "month"), -1, "day");
+                    return dateToStr(date) + " - " + dateToStr(endDate);
+                }
+                }
+            ]
+        },
+        // years
+        {
+            unit: "year", step: 1, scale_unit: "year", date_scale: "%Y",
+            subscales: [
+                {
+                    unit: "year", step: 5, template: function (date) {
+                    var dateToStr = gantt.date.date_to_str("%Y");
+                    var endDate = gantt.date.add(gantt.date.add(date, 5, "year"), -1, "day");
+                    return dateToStr(date) + " - " + dateToStr(endDate);
+                }
+                }
+            ]
+        },
+        // decades
+        {
+            unit: "year", step: 10, scale_unit: "year", template: function (date) {
+            var dateToStr = gantt.date.date_to_str("%Y");
+            var endDate = gantt.date.add(gantt.date.add(date, 10, "year"), -1, "day");
+            return dateToStr(date) + " - " + dateToStr(endDate);
+        },
+            subscales: [
+                {
+                    unit: "year", step: 100, template: function (date) {
+                    var dateToStr = gantt.date.date_to_str("%Y");
+                    var endDate = gantt.date.add(gantt.date.add(date, 100, "year"), -1, "day");
+                    return dateToStr(date) + " - " + dateToStr(endDate);
+                }
+                }
+            ]
+        }
+    ];
+</script>
+<div>
+    <div class="col-xs-12 col-sm-12 col-md-9">
+        <div class="row col-xs-12 form-group subtitulo">Releases</div>
+        <!-- BEGIN BLOCK_RELEASE -->
+        <div class="row col-xs-12 col-md-6 col-lg-4 espace-artifact form-group">
+            <span class="artifact release form-group status-{STATUS_RELEASE}" onclick="abrirModalArtifact(this);" data-content="{INFO_RELEASE}">{RELEASE}</span>
+            <!-- BEGIN BLOCK_SPRINT -->
+            <span class="col-xs-12 espace-artifact">
+            <i class="fa fa-angle-right" aria-hidden="true"></i>
+            <span class="artifact sprint form-group status-{STATUS_SPRINT}" onclick="abrirModalArtifact(this);"
+                  data-content="{INFO_SPRINT}">{SPRINT}&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;{ESFORCO_SPRINT}h</span>
+                <!-- BEGIN BLOCK_STORY -->
+            <div class="col-xs-12 espace-artifact">
+                <i class="fa fa-angle-right" aria-hidden="true"></i>
+                <span class="artifact story status-{STATUS_STORY}" onclick="abrirModalArtifact(this);" data-content="{INFO_STORY}">{STORY}&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;{ESFORCO_STORY}h</span>
+                <!-- BEGIN BLOCK_TASK -->
+                <div class="col-xs-12 espace-artifact">
+                    <i class="fa fa-angle-right" aria-hidden="true"></i>
+                    <span class="artifact task status-{STATUS_TASK}" onclick="abrirModalArtifact(this);" data-content="{INFO_TASK}">{TASK}{ESFORCO_TASK}</span>
+                </div>
+                <!-- END BLOCK_TASK -->
+            </div>
+                <!-- END BLOCK_STORY -->
+        </span>
+            <!-- END BLOCK_SPRINT -->
+        </div>
+        <!-- END BLOCK_RELEASE -->
+    </div>
+    <div class="col-xs-12 col-md-3">
+        <div class="row col-xs-12 form-group subtitulo">Backlog</div>
+        <!-- BEGIN BLOCK_N_RELEASE -->
+        <div class="row col-xs-12 espace-artifact form-group">
+            <span class="artifact {CSS_RELEASE} form-group status-{STATUS_RELEASE}" onclick="abrirModalArtifact(this);" data-content="{INFO_RELEASE}">{RELEASE}</span>
+            <!-- BEGIN BLOCK_N_STORY -->
+            <div class="col-xs-12 espace-artifact">
+                <i class="fa fa-angle-right" aria-hidden="true"></i>
+                <span class="artifact story status-{STATUS_STORY}" onclick="abrirModalArtifact(this);" data-content="{INFO_STORY}">{STORY}</span>
+                <!-- BEGIN BLOCK_N_TASK -->
+                <div class="col-xs-12 espace-artifact">
+                    <i class="fa fa-angle-right" aria-hidden="true"></i>
+                    <span class="artifact task status-{STATUS_TASK}" onclick="abrirModalArtifact(this);" data-content="{INFO_TASK}">{TASK}</span>
+                </div>
+                <!-- END BLOCK_N_TASK -->
+            </div>
+            <!-- END BLOCK_N_STORY -->
+        </div>
+        <!-- END BLOCK_N_RELEASE -->
+    </div>
+</div>
+
+<div id="artifactModal" class="modal fade" role="dialog" tabindex='-1'>
+    <div class="modal-dialog modal-lg">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"></h4>
+            </div>
+            <div class="modal-body unkown" style="line-height: 1.5em;"></div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>

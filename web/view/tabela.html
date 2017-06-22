@@ -1,0 +1,89 @@
+<script type="text/javascript">
+    function submit(comando) {
+        ajax("{CHAMADA_AJAX}", $(event.target).closest("form").serialize() + "&comando=" + comando, function (dados) {
+            if (dados) {
+                var htmlTabelaFixa = '',
+                    htmlTabelaComplemento = '<thead class="bold" style="background: #9CCFEC"><td>Tabela/Componente/Serviço</td><td>Justificativa</td></thead>';
+
+                $.each(dados, function (index, item) {
+                    htmlTabelaFixa += '<tr><td style="vertical-align: middle">' + item.nome + '</td><td>Leitura</td><td>' + (item.comentario ? item.comentario : '') + '</td><td>Sim</td></tr>';
+                    htmlTabelaComplemento += '<tr class="par_impar"><td style="vertical-align: middle">' + item.nome + '</td><td style="vertical-align: middle"><form><textarea name="comentario[' + item.nome + '][' + item.id_tabela + ']" class="form-control" rows="5">' + (item.comentario ? item.comentario : '') + '</textarea></form></td></tr>';
+                });
+
+                var resposta = $('#resposta');
+                resposta.html(htmlTabelaFixa);
+                selectElementContents(resposta[0]);
+
+                $('#complemento').html(htmlTabelaComplemento);
+
+                var $textarea = $('textarea');
+                $textarea.unbind('keyup');
+                $textarea.keyup(function () {
+                    var campo = $(this);
+                    delay(function () {
+                        ajax("{CHAMADA_AJAX}", campo.closest('form').serialize() + '&comando={ID_JSON_SALVAR}');
+                    }, 1000);
+                });
+            }
+        });
+    }
+
+    function selectElementContents(el) {
+        var body = document.body, range, sel;
+        if (document.createRange && window.getSelection) {
+            range = document.createRange();
+            sel = window.getSelection();
+            sel.removeAllRanges();
+            try {
+                range.selectNodeContents(el);
+                sel.addRange(range);
+            } catch (e) {
+                range.selectNode(el);
+                sel.addRange(range);
+            }
+        } else if (body.createTextRange) {
+            range = body.createTextRange();
+            range.moveToElementText(el);
+            range.select();
+        }
+    }
+
+    var delay = (function () {
+        var timer = 0;
+        return function (callback, ms) {
+            clearTimeout(timer);
+            timer = setTimeout(callback, ms);
+        };
+    })();
+</script>
+<form id="formulario" action="javascript:submit({ID_JSON});">
+    <div class="box-header with-border">
+        <div class="col-xs-12 col-sm-6 form-group">
+            <label for="tabelas">Tabelas (separada por quebra de linha):</label>
+            <textarea id="tabelas" name="tabelas" class="form-control form-group" rows="7" placeholder="schema1.tabela1
+schema2.tabela2
+schema3.tabela3
+"></textarea>
+        </div>
+        <div class="col-xs-12 col-sm-6 form-group">
+            <label for="query">Query (separada por ';'):</label>
+            <textarea id="query" name="query" class="form-control form-group" rows="7" placeholder="SELECT *
+FROM schema.tabela;
+SELECT *
+FROM schema.tabela;"></textarea>
+        </div>
+        <div class="row col-sm-5 col-md-3">
+            <input class="form-control btn btn-primary" type="button" onclick="submit();" value="Buscar" id="botao_buscar">
+        </div>
+    </div>
+</form>
+<div class="col-sm-12 form-group">
+    <table id="resposta" class="text-center tabelaBorda" style="font-family: Calibri; font-size: 10pt;">
+    </table>
+</div>
+
+<div class="col-sm-12">
+    <table id="complemento" class="table text-center tabelaBorda">
+    </table>
+</div>
+
