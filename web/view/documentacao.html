@@ -1,0 +1,115 @@
+<script type="text/javascript">
+    function submit(comando) {
+        var falha = false, inputs = $(event.target).closest("form").find(":input[required]");
+        $("label").css("color", "");
+        for (var i = 0; i < inputs.length; i++) {
+            var input = $(inputs[i]);
+
+            if (input.val() == "") {
+                var label = $("label[for='" + input.prop("id") + "']").css("color", "red");
+                if (!falha)
+                    input.focus();
+                falha = true;
+            }
+        }
+
+        if (falha) {
+            $.notify("Favor preencher os campos obrigatórios (em vermelho).", "error");
+            return;
+        }
+
+        ajax("{CHAMADA_AJAX}", $(event.target).closest("form").serialize() + "&comando=" + comando, '', function (dados) {
+            setTimeout(function () {
+                window.location = "{PAGINA_RETORNO}";
+            }, 2000);
+        });
+    }
+</script>
+<!-- BEGIN PRE_BLOCK_GROUP -->
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 box-header">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center bold thead">
+        Escolha o projeto:
+    </div>
+    <!-- BEGIN BLOCK_GROUP -->
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 par_impar">
+        <a href="?group_id={GROUP_ID}">{GROUP_NAME} ({UNIX_GROUP_NAME})</a>
+    </div>
+    <!-- END BLOCK_GROUP -->
+</div>
+<!-- END PRE_BLOCK_GROUP -->
+
+<!-- BEGIN PRE_BLOCK_RELEASE -->
+<div class="box-header with-border">
+    <div class="col-xs-12 col-sm-8" style="padding-right: 5px; padding-left: 5px;">
+        <div class="box box-info box-header">
+            <div class="text-center bold thead form-group">
+                Configuração
+            </div>
+            <form id="formulario" action="javascript:submit({ID_JSON});">
+                <input type="hidden" name="group_id" id="group_id" value="{GROUP_ID}">
+                <div class="row form-group">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <label for="unix_name">Nome do Esquema</label>
+                        <input type="text" name="unix_name" id="unix_name" value="{UNIX_NAME}" class="form-control" style="color:black">
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <label for="diretorio">Diretório (se for necessário)</label>
+                        <div class="form-group">
+                        <span style="color: lightslategray; font-family: monospace;">
+                            https://svn.mec.gov.br/simec/simec/trunk/docs/05-Agil/
+                            <input type="text" name="diretorio" id="diretorio" value="{DIRETORIO}" style="color:black; width: 200px; display: inline" class="form-control">
+                            /release-XXXX
+                        </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <label for="caminho_mer">Caminho do MER</label>
+                        <div class="form-group">
+                        <span style="color: lightslategray; font-family: monospace;">
+                            https://svn.mec.gov.br/simec/simec/trunk/docs/01-Especificacao/Banco de dados/Modelo de dados/
+                            <input type="text" name="caminho_mer" id="caminho_mer" value="{CAMINHO_MER}" class="form-control" style="color:black">
+                        </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-xs-12 col-sm-offset-3 col-sm-6 col-md-offset-4 col-md-4 col-lg-4">
+                        <input class="form-control btn btn-primary btn-block" type="button" onclick="submit();" value="Salvar" id="botao_salvar">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="col-xs-12 col-sm-4" style="padding-right: 5px; padding-left: 5px;">
+        <div class="box box-info box-header form-group">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center bold thead">Releases para download</div>
+            <!-- BEGIN BLOCK_RELEASE -->
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center par_impar">
+                <a href="#" onclick="
+                bootbox.confirm({
+                    title: 'O MER precisa estar atualizado.',
+                    message: 'O MER está atualizada?',
+                    buttons: {
+                        cancel: {
+                            label: '<i class=\'fa fa-times\'></i> Não'
+                        },
+                        confirm: {
+                            label: '<i class=\'fa fa-check\'></i> Sim'
+                        }
+                    },
+                    callback: function (result) {
+                        if (result)
+                            window.location.href = '?group_id={GROUP_ID}&sprint={SPRINT}';
+                    }
+                });">{RELEASE}</a>
+            </div>
+            <!-- END BLOCK_RELEASE -->
+        </div>
+    </div>
+</div>
+<!-- END PRE_BLOCK_RELEASE -->

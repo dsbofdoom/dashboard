@@ -1,0 +1,79 @@
+<script>
+    function submit(comando) {
+        ajax("{CHAMADA_AJAX}", $(event.target).closest("form").serialize() + "&comando=" + comando, '', function (dados) {
+            setTimeout(function () {
+                window.location = "{PAGINA_RETORNO}";
+            }, 2000);
+        });
+    }
+</script>
+
+<form id="formulario" method="post" action="">
+    <div class="box-header with-border">
+        <div class="col-xs-12 form-group">
+            <div
+                    class="col-xs-12 form-group bold text-primary subtitulo">Usuário
+            </div>
+            <div class="col-xs-12 col-md-6 form-group">
+                <label for="nome">Nome</label> <input id="nome" name="nome"
+                                                      type="text" class="form-control" value="{VALUE_NOME}">
+            </div>
+            <div class="col-xs-12 col-md-6 form-group">
+                <label for="tuleap_user">Usuário</label> <input id="tuleap_user" name="tuleap_user"
+                                                      type="text" class="form-control" value="{VALUE_TULEAP_USER}">
+            </div>
+            <div class="col-xs-12 col-md-6 form-group">
+                <label for="email">E-mail</label> <input id="email" name="email"
+                                                         type="text" placeholder="abc@abc.com..." class="form-control"
+                                                         value="{VALUE_EMAIL}">
+            </div>
+            <div class="col-xs-12 col-md-6 form-group">
+                <label for="perfil">Perfil</label> {SCRIPT_PERFIL} <select
+                    id="perfil" name="perfil" class="form-control">
+                <option value="" selected></option>
+                <option value="0">Administrador</option>
+                <option value="1">Escrita</option>
+                <option value="2">Consulta</option>
+            </select>
+            </div>
+        </div>
+    </div>
+    <div class="box-header with-border">
+        <div class="col-xs-12 col-sm-6 col-md-4">
+            <input class="form-control btn btn-primary" type="submit"
+                   value="Pesquisar" id="botao_pesquisar">
+        </div>
+    </div>
+    <div class="box-header">
+        <!-- BEGIN BLOCK_RESULTADO -->
+        <div class="hidden-xs col-sm-12 bold center thead" style="background-color: #DDD">
+            <div class="col-sm-3">Nome</div>
+            <div class="col-sm-3">Usuário</div>
+            <div class="col-sm-3">E-mail</div>
+            <div class="col-sm-2">Pefil</div>
+            <div class="col-sm-1">Situação</div>
+        </div>
+        <!-- BEGIN BLOCK_VALORES -->
+        <div
+                class="col-xs-12 form-group center par_impar">
+            <div class="col-xs-12 col-sm-3">
+                <span class="visible-xs bold">Nome:</span> <a
+                    href="{DIRETORIO_CONTEUDO}/addUsuario?id={ID_USUARIO}">{NOME}</a>
+            </div>
+            <div class="col-xs-12 col-sm-3">
+                <span class="visible-xs bold">Usuário:</span> {TULEAP_USER}
+            </div>
+            <div class="col-xs-12 col-sm-3">
+                <span class="visible-xs bold">E-mail:</span> {EMAIL}
+            </div>
+            <div class="col-xs-12 col-sm-2">
+                <span class="visible-xs bold">Perfil:</span> {PERFIL}
+            </div>
+            <div class="col-xs-12 col-sm-1">
+                <span class="visible-xs bold">Ativo:</span> {ATIVO}
+            </div>
+        </div>
+        <!-- END BLOCK_VALORES -->
+        <!-- END BLOCK_RESULTADO -->
+    </div>
+</form>

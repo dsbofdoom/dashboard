@@ -1,23 +1,19 @@
 <?php
-require_once($_SERVER ['DOCUMENT_ROOT'] . "/dashboard/codigo/portal/ConstantesPortal.php");
-
-$tpl = new Template ($_SERVER ['DOCUMENT_ROOT'] . "/dashboard/index.html", true);
+$tpl = new raelgc\Template ('index.html', false);
 
 if (session_status() === PHP_SESSION_NONE)
 {
-    echo "<div style='background-color:white; font-weight:bold'>Favor configurar session.auto_start 
-no php.ini<br>
-	; Initialize session on request startup.<br>
-	; http://php.net/session.auto-start<br>
-	session.auto_start = 1</div>";
+    session_start();
 }
 else
 {
     session_destroy();
+    session_start();
 }
 
 $tpl->NOME_SISTEMA = NOME_SISTEMA;
 $tpl->CHAMADA_AJAX = CHAMADA_AJAX;
-$tpl->DIRETORIO_RAIZ = DIRETORIO_RAIZ;
+$tpl->DIRETORIO_CONTEUDO = DIRETORIO_RAIZ_VIEW;
+$tpl->PAGINA_PRINCIPAL = PAGINA_PRINCIPAL;
 
 $tpl->show();
